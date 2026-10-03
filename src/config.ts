@@ -27,8 +27,6 @@ export const profile = {
 export const socials = [
   { label: 'Google Scholar', href: 'https://scholar.google.com/citations?user=sTfJNSIAAAAJ&hl=en', icon: 'scholar' },
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/kaidatavis/', icon: 'linkedin' },
-  { label: 'Bluesky', href: 'https://bsky.app/profile/kaidatavis.bsky.social', icon: 'bluesky' },
-  { label: 'University Profile', href: 'https://www.nottingham.ac.uk/computerscience/people/kai.xu', icon: 'university' },
 ] as const;
 
 export const nav = [
