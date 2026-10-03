@@ -2,15 +2,30 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { grants } from '../data/funding';
 import { serviceGroups } from '../data/services';
+import { awards } from '../data/awards';
 import { route } from '../lib/routes';
 
-const highlightedGrants = grants.filter((grant) => grant.highlight);
+/** Each section shows at most this many entries, newest first. */
+const LIMIT = 4;
 
-const highlightedServices = serviceGroups.flatMap((group) =>
-  group.items.filter((item) => item.highlight),
-);
+/** First year in a period or `years` string, e.g. "2022–present" -> 2022. */
+function startYear(years: string | undefined): number {
+  const match = years?.match(/\d{4}/);
+  return match ? Number(match[0]) : 0;
+}
 
-const description = `Selected grants and professional service: ${highlightedGrants.length} highlighted research projects and ${highlightedServices.length} highlighted roles.`;
+/** Newest first, ties keeping the order the data files list them in. */
+const allGrants = grants.filter((grant) => grant.highlight).sort((a, b) => startYear(b.period) - startYear(a.period));
+const allServices = serviceGroups
+  .flatMap((group) => group.items.filter((item) => item.highlight))
+  .sort((a, b) => startYear(b.years) - startYear(a.years));
+const allAwards = [...awards].sort((a, b) => b.year - a.year);
+
+const highlightedGrants = allGrants.slice(0, LIMIT);
+const highlightedServices = allServices.slice(0, LIMIT);
+const highlightedAwards = allAwards.slice(0, LIMIT);
+
+const description = `Selected grants, professional service and awards: ${highlightedGrants.length} research projects, ${highlightedServices.length} professional roles and ${highlightedAwards.length} awards.`;
 ---
 
 <BaseLayout title="Highlights" description={description}>
@@ -109,6 +124,36 @@ const description = `Selected grants and professional service: ${highlightedGran
               )}
               {item.note && (
                 <p class="prose-body mt-1 text-[0.9rem] text-[var(--fg-muted)]">{item.note}</p>
+              )}
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section class="mt-14">
+      <div class="flex flex-wrap items-baseline justify-between gap-4">
+        <h2 class="font-serif text-xl font-semibold tracking-tight">Awards</h2>
+        <a
+          href={route('/bio')}
+          class="shrink-0 text-sm text-[var(--link)] no-underline hover:underline"
+        >
+          More on bio →
+        </a>
+      </div>
+
+      <ul class="mt-6 space-y-4">
+        {
+          highlightedAwards.map((award) => (
+            <li class="border-l-2 border-[var(--color-accent-400)] pl-5">
+              <p class="font-serif text-base leading-snug font-semibold tracking-tight">
+                {award.title}
+              </p>
+              <p class="mt-0.5 font-sans text-xs tracking-wide text-[var(--fg-subtle)]">
+                {award.year} · {award.venue}
+              </p>
+              {award.note && (
+                <p class="prose-body mt-1 text-[0.9rem] text-[var(--fg-muted)]">{award.note}</p>
               )}
             </li>
           ))
