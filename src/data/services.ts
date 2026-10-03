@@ -28,29 +28,52 @@ export const serviceGroups: ServiceGroup[] = [
     blurb: 'Ongoing roles with learned societies, research networks and funding bodies.',
     items: [
       {
+        role: 'Conference chair',
+        venue: 'Eurographics Conference on Visualisation (EuroVis)',
+        years: '2026',
+        note: 'The largest data visualisation conference in Europe.',
+      },
+      {
+        role: 'Chair',
+        venue: 'UK Chapter of the EuroGraphics Association (EGUK)',
+        years: '2022–present',
+        note: 'The largest computer graphics professional body in Europe.',
+      },
+      {
         role: 'Director',
         venue: 'UK Chapter of the EuroGraphics Association (EGUK)',
         years: '2020–present',
         note: 'The leading UK professional organisation for computer graphics, including games, AR/VR and data visualisation.',
       },
       {
-        role: 'Founding member',
-        venue:
-          'VizTIG, the visualisation interest group at the Alan Turing Institute',
-        years: '2023',
+        role: 'Panel member',
+        venue: 'UKRI Turing AI Pioneer interdisciplinary fellowships',
+        years: '2026',
+      },
+      {
+        role: 'Co-organiser',
+        venue: 'VizTIG, the visualisation interest group at the Alan Turing Institute',
+        years: '2022–present',
+        note: 'The UK national centre for AI and data science.',
         url: 'https://www.turing.ac.uk/research/interest-groups/visualization',
       },
       {
-        role: 'Expert Fellow',
-        venue: 'EPSRC SPRITE+ network',
-        years: '2021',
-        note: 'A research network funded by EPSRC covering security, privacy, identity and trust.',
+        role: 'Founder and co-organiser',
+        venue: 'Generative AI Nottingham (GAIN) Special Interest Group',
+        years: '2024–present',
+        note: 'Part of Generative AI Nottingham, the university-wide generative AI initiative.',
       },
       {
         role: 'Member',
         venue: 'EPSRC Peer Review College',
-        years: '2017–present',
+        years: '2015–present',
         note: 'EPSRC is the main UK funding body for engineering, mathematics and physics, including computer science.',
+      },
+      {
+        role: 'Expert Fellow',
+        venue: 'EPSRC research network SPRITE+',
+        years: '2020–present',
+        note: 'A research network funded by EPSRC covering security, privacy, identity and trust.',
       },
     ],
   },
@@ -58,6 +81,12 @@ export const serviceGroups: ServiceGroup[] = [
     title: 'Workshops and seminars',
     blurb: 'Conferences and events I have organised or co-chaired.',
     items: [
+      {
+        role: 'Co-chair',
+        venue: 'Provenance Visualisation workshop series at IEEE VIS',
+        years: '2024, 2018',
+        note: 'Held at IEEE VIS, the largest data visualisation conference.',
+      },
       {
         role: 'Organiser',
         venue:
@@ -88,7 +117,7 @@ export const serviceGroups: ServiceGroup[] = [
         role: 'Co-chair',
         venue:
           'Machine Learning from User Interactions for Visualization and Analytics (MLUI)',
-        years: '2020',
+        years: '2020, 2021',
         note: 'Part of VisWeek 2020.',
       },
       {
@@ -134,6 +163,24 @@ export const serviceGroups: ServiceGroup[] = [
   {
     title: 'Editorial',
     items: [
+      {
+        role: 'Guest editor',
+        venue:
+          'IEEE Computer Graphics and Applications, special issue on “AI Governance, Authenticity, and Provenance for Visual Media”',
+        years: '2026',
+      },
+      {
+        role: 'Guest editor',
+        venue:
+          'Computers & Graphics Journal, special issue on Computer Graphics and Visual Computing',
+        years: '2024, 2025',
+      },
+      {
+        role: 'Guest editor',
+        venue:
+          'MDPI Computers Journal, special issue on Computer Graphics and Visual Computing',
+        years: '2020, 2021',
+      },
       {
         role: 'Guest editor',
         venue:

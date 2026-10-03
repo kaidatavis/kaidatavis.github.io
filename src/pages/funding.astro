@@ -39,6 +39,12 @@ const description = `Research funding and grants, ${first} to ${last}, in data v
             </div>
 
             <dl class="mt-2 flex flex-wrap gap-x-6 gap-y-1 font-sans text-[0.8rem]">
+              {grant.role && (
+                <div class="flex gap-1.5">
+                  <dt class="shrink-0 text-[var(--fg-subtle)]">Role</dt>
+                  <dd>{grant.role}</dd>
+                </div>
+              )}
               {grant.funder && (
                 <div class="flex gap-1.5">
                   <dt class="text-[var(--fg-subtle)]">Funder</dt>
