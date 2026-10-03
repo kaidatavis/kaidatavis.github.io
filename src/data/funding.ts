@@ -14,6 +14,8 @@ export interface Grant {
   year: number;
   /** Your role on the grant. Omitted where the CV does not record one. */
   role?: string;
+  /** Featured on /highlights. Mirrors the bold entries in the 2026 CV. */
+  highlight?: boolean;
   /** Funding body, when it is recorded. */
   funder?: string;
   amount?: string;
@@ -35,6 +37,7 @@ export const grants: Grant[] = [
       'Applying generative AI to the design of accessible and inclusive floor plans.',
   },
   {
+    highlight: true,
     title:
       'Decoding the Vindolanda tablets: Generative AI to reassemble, read and restore Roman handwritten texts',
     period: '2025–2029',
@@ -66,6 +69,7 @@ export const grants: Grant[] = [
       'An internal collaboration fund award supporting human-AI collaboration for scientific discovery.',
   },
   {
+    highlight: true,
     title: 'Cognitive Engineering for Human-Centred AI Design',
     period: '2021–2024',
     year: 2021,
@@ -76,6 +80,7 @@ export const grants: Grant[] = [
       'An industry collaboration with Genetec on cognitive engineering for human-centred AI design.',
   },
   {
+    highlight: true,
     title:
       'RAMP VIS: Making Visual Analytics an Integral Part of the Technological Infrastructure for Combating Covid-19',
     period: '2021–2022',
@@ -161,6 +166,7 @@ export const grants: Grant[] = [
       'Building the big data infrastructure and data lake for the visual analysis of open-source intelligence data.',
   },
   {
+    highlight: true,
     title:
       'VALCRI – Visual AnaLytics for sense-making in CRiminal Intelligence analysis',
     period: '2014–2018',
@@ -202,6 +208,7 @@ export const grants: Grant[] = [
       'Investigating how interactive projection techniques can help users improve their understanding of data with very high dimensionality.',
   },
   {
+    highlight: true,
     title: 'Multiple source information assimilation to support decision-making',
     period: '2013–2015',
     year: 2013,
@@ -212,6 +219,7 @@ export const grants: Grant[] = [
       'A two-year project applying visual analytics techniques to support sense making in intelligence analysis.',
   },
   {
+    highlight: true,
     title: 'Data Intensive Visual Analytics (DIVA)',
     period: '2012–2013',
     year: 2012,
@@ -223,6 +231,7 @@ export const grants: Grant[] = [
       'A project jointly funded by EPSRC and Dstl, involving Middlesex University and three further partners.',
   },
   {
+    highlight: true,
     title: 'UK Visual Analytics Consortium Joint Research Project',
     period: '2011–2013',
     year: 2011,

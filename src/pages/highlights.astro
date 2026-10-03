@@ -1,0 +1,119 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { grants } from '../data/funding';
+import { serviceGroups } from '../data/services';
+import { route } from '../lib/routes';
+
+const highlightedGrants = grants.filter((grant) => grant.highlight);
+
+const highlightedServices = serviceGroups.flatMap((group) =>
+  group.items.filter((item) => item.highlight),
+);
+
+const description = `Selected grants and professional service: ${highlightedGrants.length} highlighted research projects and ${highlightedServices.length} highlighted roles.`;
+---
+
+<BaseLayout title="Highlights" description={description}>
+  <div class="container-page py-12 sm:py-16">
+    <header class="max-w-2xl">
+      <h1 class="font-serif text-3xl font-bold tracking-tight sm:text-4xl">Highlights</h1>
+      <p class="prose-body mt-3 text-[var(--fg-muted)]">
+        The grants and professional roles I have marked as highlights on my CV. Amounts are as
+        recorded at the time of award, and some are total project values rather than my own share.
+      </p>
+    </header>
+
+    <section class="mt-14">
+      <div class="flex flex-wrap items-baseline justify-between gap-4">
+        <h2 class="font-serif text-xl font-semibold tracking-tight">Research funding</h2>
+        <a
+          href={route('/funding')}
+          class="shrink-0 text-sm text-[var(--link)] no-underline hover:underline"
+        >
+          All {grants.length} grants →
+        </a>
+      </div>
+
+      <ol class="mt-6 space-y-5">
+        {
+          highlightedGrants.map((grant) => (
+            <li class="border-l-2 border-[var(--color-accent-400)] pl-5">
+              <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                <h3 class="font-serif text-base leading-snug font-semibold tracking-tight">
+                  {grant.title}
+                </h3>
+                <span class="font-sans text-xs tracking-wide text-[var(--fg-subtle)]">
+                  {grant.period}
+                </span>
+              </div>
+
+              <dl class="mt-1.5 flex flex-wrap gap-x-6 gap-y-1 font-sans text-[0.8rem]">
+                {grant.amount && (
+                  <div class="flex gap-1.5">
+                    <dt class="shrink-0 text-[var(--fg-subtle)]">Funding</dt>
+                    <dd>{grant.amount}</dd>
+                  </div>
+                )}
+                {grant.role && (
+                  <div class="flex gap-1.5">
+                    <dt class="shrink-0 text-[var(--fg-subtle)]">Role</dt>
+                    <dd>{grant.role}</dd>
+                  </div>
+                )}
+              </dl>
+
+              {grant.funder && (
+                <p class="mt-1 font-sans text-[0.8rem] text-[var(--fg-muted)]">{grant.funder}</p>
+              )}
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+
+    <section class="mt-14">
+      <div class="flex flex-wrap items-baseline justify-between gap-4">
+        <h2 class="font-serif text-xl font-semibold tracking-tight">Professional service</h2>
+        <a
+          href={route('/services')}
+          class="shrink-0 text-sm text-[var(--link)] no-underline hover:underline"
+        >
+          All roles →
+        </a>
+      </div>
+
+      <ul class="mt-6 space-y-4">
+        {
+          highlightedServices.map((item) => (
+            <li class="border-l-2 border-[var(--color-accent-400)] pl-5">
+              <p class="font-serif text-base leading-snug font-semibold tracking-tight">
+                {item.role && item.venue ? (
+                  <>
+                    {item.role},{' '}
+                    {item.url ? (
+                      <a href={item.url} rel="noopener" target="_blank" class="no-underline hover:underline">
+                        {item.venue}
+                      </a>
+                    ) : (
+                      item.venue
+                    )}
+                  </>
+                ) : (
+                  (item.venue ?? item.role)
+                )}
+              </p>
+              {item.years && (
+                <p class="mt-0.5 font-sans text-xs tracking-wide text-[var(--fg-subtle)]">
+                  {item.years}
+                </p>
+              )}
+              {item.note && (
+                <p class="prose-body mt-1 text-[0.9rem] text-[var(--fg-muted)]">{item.note}</p>
+              )}
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  </div>
+</BaseLayout>

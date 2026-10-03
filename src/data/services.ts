@@ -9,6 +9,8 @@
 export interface ServiceItem {
   /** The role held, e.g. "Co-chair". Omitted when the entry is just a venue. */
   role?: string;
+  /** Featured on /highlights. Mirrors the bold entries in the 2026 CV. */
+  highlight?: boolean;
   venue: string;
   /** A year, or a range like "2010–2015". */
   years?: string;
@@ -28,12 +30,14 @@ export const serviceGroups: ServiceGroup[] = [
     blurb: 'Ongoing roles with learned societies, research networks and funding bodies.',
     items: [
       {
+        highlight: true,
         role: 'Conference chair',
         venue: 'Eurographics Conference on Visualisation (EuroVis)',
         years: '2026',
         note: 'The largest data visualisation conference in Europe.',
       },
       {
+        highlight: true,
         role: 'Chair',
         venue: 'UK Chapter of the EuroGraphics Association (EGUK)',
         years: '2022–present',
@@ -46,11 +50,13 @@ export const serviceGroups: ServiceGroup[] = [
         note: 'The leading UK professional organisation for computer graphics, including games, AR/VR and data visualisation.',
       },
       {
+        highlight: true,
         role: 'Panel member',
         venue: 'UKRI Turing AI Pioneer interdisciplinary fellowships',
         years: '2026',
       },
       {
+        highlight: true,
         role: 'Co-organiser',
         venue: 'VizTIG, the visualisation interest group at the Alan Turing Institute',
         years: '2022–present',
@@ -58,12 +64,14 @@ export const serviceGroups: ServiceGroup[] = [
         url: 'https://www.turing.ac.uk/research/interest-groups/visualization',
       },
       {
+        highlight: true,
         role: 'Founder and co-organiser',
         venue: 'Generative AI Nottingham (GAIN) Special Interest Group',
         years: '2024–present',
         note: 'Part of Generative AI Nottingham, the university-wide generative AI initiative.',
       },
       {
+        highlight: true,
         role: 'Member',
         venue: 'EPSRC Peer Review College',
         years: '2015–present',
@@ -96,6 +104,7 @@ export const serviceGroups: ServiceGroup[] = [
         url: 'https://visxprov.github.io/',
       },
       {
+        highlight: true,
         role: 'Organiser',
         venue:
           'Dagstuhl Seminar 23372: Human-Centered Approaches for Provenance in Automated Data Science',
@@ -103,6 +112,7 @@ export const serviceGroups: ServiceGroup[] = [
         url: 'https://www.dagstuhl.de/23372',
       },
       {
+        highlight: true,
         role: 'Organiser',
         venue: 'Dagstuhl Seminar 18462: Provenance and Logging for Sense Making',
         years: '2018',
@@ -164,6 +174,7 @@ export const serviceGroups: ServiceGroup[] = [
     title: 'Editorial',
     items: [
       {
+        highlight: true,
         role: 'Guest editor',
         venue:
           'IEEE Computer Graphics and Applications, special issue on “AI Governance, Authenticity, and Provenance for Visual Media”',
