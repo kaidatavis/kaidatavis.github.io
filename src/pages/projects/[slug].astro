@@ -1,0 +1,106 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/Icon.astro';
+import { profile } from '../../config';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((project) => ({
+    params: { slug: project.id.replace(/\.mdx?$/, '') },
+    props: { project },
+  }));
+}
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+
+const { title, summary, stack, links, phd, date, status } = project.data;
+const year = date ? date.getFullYear() : null;
+---
+
+<BaseLayout title={title} description={summary}>
+  <div class="container-page py-12 sm:py-16">
+    <a
+      href="/projects"
+      class="inline-flex items-center gap-1 text-sm text-[var(--fg-subtle)] no-underline hover:text-[var(--link)] hover:underline"
+    >
+      <Icon name="arrowRight" class="size-3.5 rotate-180" />
+      All projects
+    </a>
+
+    <article class="mt-6">
+      <header>
+        <div class="flex flex-wrap items-baseline gap-x-2.5 gap-y-1">
+          <h1 class="font-serif text-3xl font-bold tracking-tight sm:text-4xl">{title}</h1>
+          {
+            status === 'open' && (
+              <span class="rounded-full bg-[var(--color-accent-700)] px-2 py-px font-sans text-[0.65rem] font-semibold tracking-wide text-white uppercase dark:bg-[var(--color-accent-500)] dark:text-[var(--color-accent-950)]">
+                Open
+              </span>
+            )
+          }
+          {
+            phd && (
+              <span class="rounded-full border border-[var(--border-strong)] px-2 py-px font-sans text-[0.65rem] font-medium tracking-wide text-[var(--fg-subtle)] uppercase">
+                PhD-scale
+              </span>
+            )
+          }
+          {year && <span class="text-sm text-[var(--fg-subtle)]">{year}</span>}
+        </div>
+
+        {
+          summary && (
+            <p class="prose-body mt-4 text-lg leading-relaxed text-[var(--fg-muted)]">
+              {summary}
+            </p>
+          )
+        }
+
+        {
+          stack.length > 0 && (
+            <ul class="mt-5 flex flex-wrap gap-1.5">
+              {stack.map((tech) => (
+                <li class="rounded border border-[var(--border)] bg-[var(--bg-subtle)] px-2 py-0.5 font-sans text-[0.72rem] text-[var(--fg-subtle)]">
+                  {tech}
+                </li>
+              ))}
+            </ul>
+          )
+        }
+      </header>
+
+      {
+        links.length > 0 && (
+          <div class="mt-6 flex flex-wrap gap-4 border-y border-[var(--border)] py-4">
+            {links.map((link) => (
+              <a
+                href={link.href}
+                rel="noopener"
+                target="_blank"
+                class="inline-flex items-center gap-1.5 text-sm text-[var(--link)] no-underline hover:underline"
+              >
+                <Icon name="external" class="size-3.5" />
+                {link.label}
+              </a>
+            ))}
+          </div>
+        )
+      }
+
+      <div class="prose-body mt-8 space-y-4 [&>*:first-child]:mt-0">
+        <Content />
+      </div>
+    </article>
+
+    <p class="mt-12 border-t border-[var(--border)] pt-6 text-sm text-[var(--fg-subtle)]">
+      Interested in this work? <a href="/projects#getting-started">See how to get started</a>
+      or <a href={`mailto:${profile.email}`}>email me</a>.
+    </p>
+  </div>
+</BaseLayout>

@@ -1,0 +1,187 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PublicationItem from '../components/PublicationItem.astro';
+import Icon from '../components/Icon.astro';
+import { getPublicationCategories, getPublications } from '../lib/publications';
+import { profile } from '../config';
+
+const pubs = getPublications();
+const categories = getPublicationCategories();
+
+// Group by year, newest first.
+const byYear = new Map<number, typeof pubs>();
+for (const pub of pubs) {
+  const list = byYear.get(pub.year);
+  if (list) list.push(pub);
+  else byYear.set(pub.year, [pub]);
+}
+const years = [...byYear.keys()].sort((a, b) => b - a);
+
+const doiCount = pubs.filter((p) => p.doi).length;
+const firstYear = years.at(-1) ?? 0;
+const lastYear = years[0] ?? 0;
+const description = `${pubs.length} publications on data visualisation, visual analytics and human-AI collaboration, ${firstYear} to ${lastYear}.`;
+---
+
+<BaseLayout title="Papers" description={description}>
+  <div class="container-wide py-12 sm:py-16">
+    <header class="max-w-2xl">
+      <h1 class="font-serif text-3xl font-bold tracking-tight sm:text-4xl">Papers</h1>
+      <p class="prose-body mt-3 text-[var(--fg-muted)]">
+        {pubs.length} publications from {firstYear} to {lastYear}, across journals,
+        conferences, preprints and book chapters. {doiCount} are available via DOI.
+      </p>
+    </header>
+
+    <div class="sticky top-16 z-30 -mx-6 mt-8 border-y border-[var(--border)] bg-[color-mix(in_oklch,var(--bg)_92%,transparent)] px-6 py-3 backdrop-blur-md sm:-mx-8 sm:px-8">
+      <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div class="relative sm:w-72">
+          <label for="pub-search" class="sr-only">Search publications</label>
+          <span
+            class="pointer-events-none absolute top-1/2 left-2.5 -translate-y-1/2 text-[var(--fg-subtle)]"
+          >
+            <Icon name="search" class="size-4" />
+          </span>
+          <input
+            type="search"
+            id="pub-search"
+            placeholder="Search title, author, venue…"
+            autocomplete="off"
+            class="w-full rounded-md border border-[var(--border)] bg-[var(--bg)] py-1.5 pr-3 pl-8 text-sm text-[var(--fg)] placeholder:text-[var(--fg-subtle)] focus:border-[var(--color-accent-500)] focus:outline-none"
+          />
+        </div>
+
+        <div class="flex flex-wrap items-center gap-1.5" role="group" aria-label="Filter by type">
+          <button
+            type="button"
+            class="filter-pill cursor-pointer rounded-full border border-[var(--border-strong)] px-3 py-1 text-[0.78rem] font-medium transition-colors"
+            data-filter="all"
+            aria-pressed="true"
+          >
+            All
+          </button>
+          {
+            categories.map((category) => (
+              <button
+                type="button"
+                class="filter-pill cursor-pointer rounded-full border border-[var(--border-strong)] px-3 py-1 text-[0.78rem] font-medium transition-colors"
+                data-filter={category}
+                aria-pressed="false"
+              >
+                {category}
+              </button>
+            ))
+          }
+        </div>
+      </div>
+
+      <p class="mt-2 text-xs text-[var(--fg-subtle)]" id="pub-count" aria-live="polite"></p>
+    </div>
+
+    <div id="pub-results">
+      {
+        years.map((year) => (
+          <section data-year-section={year}>
+            <h2 class="sticky top-[7.5rem] z-10 -mx-6 bg-[var(--bg)]/95 px-6 py-2 font-serif text-sm font-semibold tracking-widest text-[var(--fg-subtle)] uppercase backdrop-blur-sm sm:-mx-8 sm:px-8">
+              {year}
+              <span class="ml-1 font-sans text-xs font-normal tracking-normal normal-case">
+                ({byYear.get(year)?.length})
+              </span>
+            </h2>
+            {byYear.get(year)?.map((pub) => (
+              <PublicationItem pub={pub} />
+            ))}
+          </section>
+        ))
+      }
+    </div>
+
+    <p
+      id="pub-empty"
+      hidden
+      class="rounded-md border border-dashed border-[var(--border-strong)] px-6 py-12 text-center text-[var(--fg-muted)]"
+    >
+      No publications match your search.
+    </p>
+
+    <p class="mt-12 border-t border-[var(--border)] pt-6 text-sm text-[var(--fg-subtle)]">
+      Looking for something specific? <a href="https://scholar.google.com/citations?user=sTfJNSIAAAAJ&hl=en" rel="noopener" target="_blank">Search Google Scholar</a>
+      or <a href={`mailto:${profile.email}`}>email me</a>.
+    </p>
+  </div>
+</BaseLayout>
+
+<style>
+  .filter-pill {
+    color: var(--fg-muted);
+    background-color: transparent;
+  }
+  .filter-pill:hover {
+    color: var(--fg);
+    background-color: var(--bg-subtle);
+  }
+  .filter-pill[aria-pressed='true'] {
+    color: white;
+    background-color: var(--color-accent-700);
+    border-color: var(--color-accent-700);
+  }
+  :global(.dark) .filter-pill[aria-pressed='true'] {
+    color: var(--color-accent-950);
+    background-color: var(--color-accent-400);
+    border-color: var(--color-accent-400);
+  }
+</style>
+
+<script>
+  const search = document.getElementById('pub-search') as HTMLInputElement | null;
+  const pills = Array.from(document.querySelectorAll<HTMLButtonElement>('.filter-pill'));
+  const items = Array.from(document.querySelectorAll<HTMLElement>('.pub-item'));
+  const sections = Array.from(document.querySelectorAll<HTMLElement>('[data-year-section]'));
+  const countEl = document.getElementById('pub-count');
+  const emptyEl = document.getElementById('pub-empty');
+
+  let activeFilter = 'all';
+
+  function apply() {
+    const query = (search?.value ?? '').trim().toLowerCase();
+    let visible = 0;
+
+    for (const item of items) {
+      const haystack = item.dataset.search ?? '';
+      const category = item.dataset.category ?? '';
+      const matchesQuery = !query || haystack.includes(query);
+      const matchesCategory = activeFilter === 'all' || category === activeFilter;
+      const show = matchesQuery && matchesCategory;
+
+      item.hidden = !show;
+      if (show) visible++;
+    }
+
+    for (const section of sections) {
+      const anyVisible = section.querySelector('.pub-item:not([hidden])');
+      section.hidden = !anyVisible;
+    }
+
+    if (countEl) {
+      countEl.textContent =
+        visible === items.length
+          ? `${items.length} publications`
+          : `${visible} of ${items.length} publications`;
+    }
+    if (emptyEl) emptyEl.hidden = visible !== 0;
+  }
+
+  search?.addEventListener('input', apply);
+
+  for (const pill of pills) {
+    pill.addEventListener('click', () => {
+      activeFilter = pill.dataset.filter ?? 'all';
+      for (const other of pills) {
+        other.setAttribute('aria-pressed', String(other === pill));
+      }
+      apply();
+    });
+  }
+
+  apply();
+</script>

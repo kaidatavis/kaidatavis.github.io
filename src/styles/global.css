@@ -1,0 +1,211 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-serif: 'Source Serif 4', ui-serif, Georgia, Cambria, 'Times New Roman', serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  --color-accent-50: oklch(0.97 0.014 254);
+  --color-accent-100: oklch(0.93 0.032 254);
+  --color-accent-200: oklch(0.88 0.055 253);
+  --color-accent-300: oklch(0.8 0.08 252);
+  --color-accent-400: oklch(0.7 0.12 251);
+  --color-accent-500: oklch(0.62 0.15 250);
+  --color-accent-600: oklch(0.53 0.16 250);
+  --color-accent-700: oklch(0.45 0.14 251);
+  --color-accent-800: oklch(0.38 0.11 252);
+  --color-accent-900: oklch(0.32 0.09 253);
+  --color-accent-950: oklch(0.23 0.07 255);
+
+  --color-gold-400: oklch(0.78 0.13 82);
+  --color-gold-500: oklch(0.71 0.15 78);
+  --color-gold-600: oklch(0.61 0.14 74);
+}
+
+/*
+  Semantic tokens. Light values in :root, dark overrides in the
+  `.dark` class that ThemeToggle writes to <html>.
+*/
+:root {
+  --bg: oklch(0.995 0.002 250);
+  --bg-subtle: oklch(0.975 0.004 250);
+  --bg-inset: oklch(0.96 0.006 250);
+  --fg: oklch(0.22 0.015 255);
+  --fg-muted: oklch(0.48 0.015 255);
+  --fg-subtle: oklch(0.62 0.012 255);
+  --border: oklch(0.9 0.006 250);
+  --border-strong: oklch(0.82 0.008 250);
+  --link: var(--color-accent-700);
+  --link-hover: var(--color-accent-900);
+  --code-bg: oklch(0.955 0.006 250);
+  color-scheme: light;
+}
+
+.dark {
+  --bg: oklch(0.17 0.012 255);
+  --bg-subtle: oklch(0.21 0.013 255);
+  --bg-inset: oklch(0.25 0.014 255);
+  --fg: oklch(0.94 0.005 250);
+  --fg-muted: oklch(0.72 0.012 255);
+  --fg-subtle: oklch(0.58 0.012 255);
+  --border: oklch(0.29 0.014 255);
+  --border-strong: oklch(0.38 0.015 255);
+  --link: oklch(0.78 0.09 250);
+  --link-hover: oklch(0.88 0.07 250);
+  --code-bg: oklch(0.23 0.014 255);
+  color-scheme: dark;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    letter-spacing: -0.011em;
+    text-wrap: balance;
+  }
+
+  p,
+  li {
+    text-wrap: pretty;
+  }
+
+  a {
+    color: var(--link);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+    transition: color 120ms ease;
+  }
+
+  a:hover {
+    color: var(--link-hover);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent-500);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background-color: var(--color-accent-200);
+    color: var(--color-accent-950);
+  }
+
+  .dark ::selection {
+    background-color: var(--color-accent-700);
+    color: var(--color-accent-50);
+  }
+
+  code,
+  kbd,
+  samp {
+    font-family: var(--font-mono);
+    font-size: 0.875em;
+  }
+
+  :not(pre) > code {
+    background-color: var(--code-bg);
+    padding: 0.15em 0.4em;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+  }
+
+  pre {
+    background-color: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    overflow-x: auto;
+    font-size: 0.8125rem;
+    line-height: 1.6;
+  }
+
+  pre code {
+    background: none;
+    border: none;
+    padding: 0;
+  }
+
+  hr {
+    border-color: var(--border);
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9375rem;
+  }
+
+  th,
+  td {
+    text-align: left;
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  th {
+    font-weight: 600;
+    font-family: var(--font-sans);
+  }
+
+  /* Native details/summary marker removal for FAQ blocks */
+  summary::-webkit-details-marker {
+    display: none;
+  }
+}
+
+@utility prose-body {
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: var(--fg);
+}
+
+@utility container-page {
+  width: 100%;
+  max-width: 46rem;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+@utility container-wide {
+  width: 100%;
+  max-width: 60rem;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}

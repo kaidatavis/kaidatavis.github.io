@@ -1,0 +1,87 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Icon from './Icon.astro';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+  open?: boolean;
+}
+
+const { project, open = false } = Astro.props;
+const { title, summary, stack, links, phd, date } = project.data;
+
+const slug = project.id.replace(/\.mdx?$/, '');
+const year = date ? date.getFullYear() : null;
+---
+
+<article
+  class:list={[
+    'rounded-lg border border-[var(--border)] bg-[var(--bg-subtle)] p-5 transition-colors',
+    open && 'hover:border-[var(--color-accent-400)]',
+  ]}
+>
+  <div class="flex flex-wrap items-baseline gap-x-2.5 gap-y-1">
+    <h3 class="font-serif text-lg leading-snug font-semibold tracking-tight">
+      <a href={`/projects/${slug}`} class="no-underline hover:underline">{title}</a>
+    </h3>
+    {
+      open && (
+        <span class="rounded-full bg-[var(--color-accent-700)] px-2 py-px font-sans text-[0.65rem] font-semibold tracking-wide text-white uppercase dark:bg-[var(--color-accent-500)] dark:text-[var(--color-accent-950)]">
+          Open
+        </span>
+      )
+    }
+    {
+      phd && (
+        <span class="rounded-full border border-[var(--border-strong)] px-2 py-px font-sans text-[0.65rem] font-medium tracking-wide text-[var(--fg-subtle)] uppercase">
+          PhD-scale
+        </span>
+      )
+    }
+    {year && <span class="text-sm text-[var(--fg-subtle)]">{year}</span>}
+  </div>
+
+  {
+    summary && (
+      <p class="mt-2 text-[0.95rem] leading-relaxed text-[var(--fg-muted)]">{summary}</p>
+    )
+  }
+
+  {
+    stack.length > 0 && (
+      <div class="mt-3 flex flex-wrap gap-1.5">
+        {stack.map((tech) => (
+          <span class="rounded border border-[var(--border)] bg-[var(--bg)] px-2 py-0.5 font-sans text-[0.72rem] text-[var(--fg-subtle)]">
+            {tech}
+          </span>
+        ))}
+      </div>
+    )
+  }
+
+  <a
+    href={`/projects/${slug}`}
+    class="mt-4 inline-flex items-center gap-1 text-sm text-[var(--link)] no-underline hover:underline"
+  >
+    Read more
+    <Icon name="arrowRight" class="size-3.5" />
+  </a>
+
+  {
+    links.length > 0 && (
+      <div class="mt-4 flex flex-wrap gap-3">
+        {links.map((link) => (
+          <a
+            href={link.href}
+            rel="noopener"
+            target="_blank"
+            class="inline-flex items-center gap-1 text-sm text-[var(--link)] no-underline hover:underline"
+          >
+            <Icon name="external" class="size-3.5" />
+            {link.label}
+          </a>
+        ))}
+      </div>
+    )
+  }
+</article>

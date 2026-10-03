@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
+import { serviceGroups } from '../data/services';
+
+const itemCount = serviceGroups.reduce((n, g) => n + g.items.length, 0);
+const description = `Professional service: ${itemCount} roles across learned societies, editorial work, workshops, programme committees and peer review.`;
+---
+
+<BaseLayout title="Services" description={description}>
+  <div class="container-page py-12 sm:py-16">
+    <header class="max-w-2xl">
+      <h1 class="font-serif text-3xl font-bold tracking-tight sm:text-4xl">Services</h1>
+      <p class="prose-body mt-3 text-[var(--fg-muted)]">
+        Service to the visualisation, graphics and computer science communities: organising
+        workshops and seminars, editorial work, programme committees, and reviewing for journals
+        and conferences.
+      </p>
+    </header>
+
+    {
+      serviceGroups.map((group) => (
+        <section class="mt-12">
+          <h2 class="font-serif text-xl font-semibold tracking-tight">{group.title}</h2>
+          <p class="mt-1 text-sm text-[var(--fg-subtle)]">{group.blurb}</p>
+
+          <ul class="mt-5 space-y-4">
+            {group.items.map((item) => (
+              <li class="border-l-2 border-[var(--border-strong)] pl-4">
+                <div class="flex flex-wrap items-baseline gap-x-2.5 gap-y-1">
+                  {item.role && (
+                    <span class="font-sans text-[0.8rem] font-semibold tracking-tight">
+                      {item.role}
+                    </span>
+                  )}
+                  <span class="font-serif text-[1.02rem] leading-snug">
+                    {item.url ? (
+                      <a href={item.url} rel="noopener" target="_blank" class="no-underline hover:underline">
+                        {item.venue}
+                        <Icon name="external" class="ml-1 inline size-3.5 align-baseline" />
+                      </a>
+                    ) : (
+                      item.venue
+                    )}
+                  </span>
+                  {item.years && (
+                    <span class="font-sans text-[0.78rem] text-[var(--fg-subtle)]">{item.years}</span>
+                  )}
+                </div>
+                {item.note && (
+                  <p class="mt-1 text-[0.9rem] leading-relaxed text-[var(--fg-muted)]">{item.note}</p>
+                )}
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))
+    }
+  </div>
+</BaseLayout>

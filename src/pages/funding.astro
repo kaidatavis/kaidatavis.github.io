@@ -1,0 +1,72 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { grants } from '../data/funding';
+import { profile } from '../config';
+
+const first = grants.at(-1)?.year ?? 0;
+const last = grants.at(0)?.year ?? 0;
+const description = `Research funding and grants, ${first} to ${last}, in data visualisation, visual analytics, human-AI collaboration and data science.`;
+---
+
+<BaseLayout title="Funding" description={description}>
+  <div class="container-page py-12 sm:py-16">
+    <header class="max-w-2xl">
+      <h1 class="font-serif text-3xl font-bold tracking-tight sm:text-4xl">Funding</h1>
+      <p class="prose-body mt-3 text-[var(--fg-muted)]">
+        {grants.length} funded projects from {first} to {last}, spanning visual analytics,
+        intelligence analysis, health certification and data science. Amounts are as recorded at
+        the time of award; some figures are total project values rather than my own share.
+      </p>
+    </header>
+
+    <ol class="mt-12 space-y-6">
+      {
+        grants.map((grant) => (
+          <li class="border-l-2 border-[var(--color-accent-400)] pl-5">
+            <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+              <h2 class="font-serif text-lg leading-snug font-semibold tracking-tight">
+                {grant.url ? (
+                  <a href={grant.url} rel="noopener" target="_blank" class="no-underline hover:underline">
+                    {grant.title}
+                  </a>
+                ) : (
+                  grant.title
+                )}
+              </h2>
+              <span class="font-sans text-xs tracking-wide text-[var(--fg-subtle)]">
+                {grant.period}
+              </span>
+            </div>
+
+            <dl class="mt-2 flex flex-wrap gap-x-6 gap-y-1 font-sans text-[0.8rem]">
+              {grant.funder && (
+                <div class="flex gap-1.5">
+                  <dt class="text-[var(--fg-subtle)]">Funder</dt>
+                  <dd>{grant.funder}</dd>
+                </div>
+              )}
+              {grant.amount && (
+                <div class="flex gap-1.5">
+                  <dt class="text-[var(--fg-subtle)]">Funding</dt>
+                  <dd>{grant.amount}</dd>
+                </div>
+              )}
+              {grant.partners && (
+                <div class="flex gap-1.5">
+                  <dt class="shrink-0 text-[var(--fg-subtle)]">Partners</dt>
+                  <dd class="text-[var(--fg-muted)]">{grant.partners}</dd>
+                </div>
+              )}
+            </dl>
+
+            <p class="prose-body mt-2 text-[0.95rem] text-[var(--fg-muted)]">{grant.description}</p>
+          </li>
+        ))
+      }
+    </ol>
+
+    <p class="mt-12 border-t border-[var(--border)] pt-6 text-sm text-[var(--fg-subtle)]">
+      Details of any individual award are available on request — <a href={`mailto:${profile.email}`}>email me</a>.
+    </p>
+  </div>
+</BaseLayout>

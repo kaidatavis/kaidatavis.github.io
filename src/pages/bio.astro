@@ -1,0 +1,161 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
+import { profile, socials } from '../config';
+
+interface Role {
+  title: string;
+  period: string;
+  org: string;
+  orgUrl?: string;
+  points?: string[];
+}
+
+const roles: Role[] = [
+  {
+    title: 'Associate Professor',
+    period: '2022–present',
+    org: 'School of Computer Science, University of Nottingham, UK',
+  },
+  {
+    title: 'Associate Professor in Data Analytics',
+    period: '2015–2022',
+    org: 'Department of Computer Science, Middlesex University, UK',
+    points: [
+      'Six data science projects with total funding over £300k, in defence, intelligence, autonomous driving and social media.',
+      'Co-founder of the MSc by Research in Data Science.',
+    ],
+  },
+  {
+    title: 'Senior Lecturer in Visual Analytics',
+    period: '2010–2015',
+    org: 'Department of Computer Science, Middlesex University, UK',
+    points: [
+      'Seven data science projects with total funding of £12 million, in big data and intelligence analysis.',
+      'Founder of the MSc by Research in Visual Analytics, the first of its kind in the UK.',
+    ],
+  },
+  {
+    title: 'Bioinformatics Specialist',
+    period: '2009–2010',
+    org: 'The John Curtin School of Medical Research, Australian National University, Australia',
+    points: [
+      'Phenomics ontology driven database.',
+      'Next-generation DNA sequencing data management.',
+    ],
+  },
+  {
+    title: 'Senior Research Scientist',
+    period: '2008–2009',
+    org: 'ICT Centre, Commonwealth Scientific and Industrial Research Organisation (CSIRO), Australia',
+    points: [
+      'Leader of the visual analysis team for the Australian National Cancer Genomics flagship, with total funding of A$100 million.',
+    ],
+  },
+  {
+    title: 'Research Fellow',
+    period: '2004–2008',
+    org: 'National ICT Australia / School of Information Technologies, University of Sydney, Australia',
+    points: [
+      'Development of novel analysis and visualisation methods for large networks.',
+      'Contributor to GEOMI, an open-source 3D network visualisation package.',
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Bio"
+  description="Kai Xu, Associate Professor in Computer Science at the University of Nottingham. Co-director of the Visualisation Research Group (VisTAG). Research on human-AI collaboration, machine learning and data visualisation."
+>
+  <div class="container-page py-12 sm:py-16">
+    <header class="flex flex-col gap-6 sm:flex-row sm:items-start">
+      <img
+        src={profile.photo.src}
+        alt={profile.photo.alt}
+        width="160"
+        height="160"
+        loading="lazy"
+        class="size-32 shrink-0 rounded-full object-cover sm:size-40"
+      />
+
+      <div class="min-w-0">
+        <h1 class="font-serif text-3xl font-bold tracking-tight sm:text-4xl">
+          {profile.name}
+          <span class="text-[var(--fg-subtle)]">{profile.nameLocal}</span>
+        </h1>
+        <p class="mt-2 text-[var(--fg-muted)]">{profile.title}</p>
+        <p class="text-[var(--fg-muted)]">{profile.role}</p>
+
+        <ul class="mt-5 flex flex-wrap gap-x-5 gap-y-2 font-sans text-sm">
+          <li>
+            <a href={`mailto:${profile.email}`} class="inline-flex items-center gap-1.5">
+              <Icon name="mail" class="size-4" />
+              {profile.email}
+            </a>
+          </li>
+          {
+            socials.map((social) => (
+              <li>
+                <a href={social.href} rel="noopener" target="_blank">
+                  {social.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </header>
+
+    <section class="mt-14">
+      <h2 class="font-serif text-xl font-semibold tracking-tight">Career</h2>
+
+      <ol class="mt-6 space-y-8">
+        {
+          roles.map((role) => (
+            <li class="relative border-l-2 border-[var(--border)] pl-6">
+              <span class="absolute -left-[5px] top-1.5 size-2 rounded-full bg-[var(--color-accent-500)]" />
+              <h3 class="font-serif text-lg font-semibold tracking-tight">
+                {role.title}
+                <span class="ml-2 font-sans text-[0.78rem] font-normal text-[var(--fg-subtle)]">
+                  {role.period}
+                </span>
+              </h3>
+              <p class="mt-0.5 text-[0.95rem] text-[var(--fg-muted)]">
+                {role.orgUrl ? (
+                  <a href={role.orgUrl} rel="noopener" target="_blank" class="no-underline hover:underline">
+                    {role.org}
+                  </a>
+                ) : (
+                  role.org
+                )}
+              </p>
+              {role.points && (
+                <ul class="mt-2 list-disc space-y-1 pl-5 text-[0.95rem] leading-relaxed text-[var(--fg-muted)] marker:text-[var(--fg-subtle)]">
+                  {role.points.map((point) => (
+                    <li>{point}</li>
+                  ))}
+                </ul>
+              )}
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+
+    <section class="prose-body mt-14 border-t border-[var(--border)] pt-8 text-[var(--fg-muted)]">
+      <p>
+        I received my PhD in Computer Science in 2004 from the{' '}
+        <a href="http://www.uq.edu.au/" rel="noopener" target="_blank">University of Queensland</a>.
+        Before that I graduated from the{' '}
+        <a href="http://en.sjtu.edu.cn/" rel="noopener" target="_blank">Shanghai Jiao Tong University</a>{' '}
+        in 1999, with two bachelor degrees: one in Computer Science and one in Business.
+      </p>
+    </section>
+
+    <p class="mt-10 border-t border-[var(--border)] pt-6 text-sm text-[var(--fg-subtle)]">
+      See <a href="/funding">funding</a>, <a href="/papers">papers</a> and{' '}
+      <a href="/services">services</a> for the rest of the picture.
+    </p>
+  </div>
+</BaseLayout>

@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { nav } from '../config';
+---
+
+<BaseLayout title="Page not found" description="That page does not exist on kaixu.me.">
+  <div class="container-page flex min-h-[50vh] flex-col justify-center py-16">
+    <p class="font-sans text-sm tracking-widest text-[var(--fg-subtle)] uppercase">404</p>
+    <h1 class="mt-2 font-serif text-3xl font-bold tracking-tight sm:text-4xl">Page not found</h1>
+    <p class="prose-body mt-3 text-[var(--fg-muted)]">
+      That page does not exist. It may have moved when this site was rebuilt.
+    </p>
+
+    <nav aria-label="Site sections" class="mt-8">
+      <ul class="flex flex-wrap gap-x-5 gap-y-2 font-sans text-sm">
+        {
+          nav.map((item) => (
+            <li>
+              <a href={item.href}>{item.label}</a>
+            </li>
+          ))
+        }
+        <li><a href="/">Home</a></li>
+      </ul>
+    </nav>
+  </div>
+</BaseLayout>

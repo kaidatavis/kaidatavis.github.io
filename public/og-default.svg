@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Kai Xu — Associate Professor in Computer Science, University of Nottingham">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fbfbfe"/>
+      <stop offset="1" stop-color="#eef1fa"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="0" y="0" width="1200" height="8" fill="#3f51b5"/>
+
+  <g transform="translate(96 148)">
+    <rect width="104" height="104" rx="18" fill="#3f51b5"/>
+    <text x="52" y="70" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="46" font-weight="700" fill="#ffffff">KX</text>
+  </g>
+
+  <text x="96" y="360" font-family="Georgia, 'Times New Roman', serif" font-size="86" font-weight="700" fill="#16182b">Kai Xu</text>
+  <text x="96" y="418" font-family="Inter, Helvetica, Arial, sans-serif" font-size="32" fill="#4a4f66">Associate Professor in Computer Science</text>
+  <text x="96" y="466" font-family="Inter, Helvetica, Arial, sans-serif" font-size="32" fill="#4a4f66">University of Nottingham</text>
+
+  <text x="96" y="552" font-family="Inter, Helvetica, Arial, sans-serif" font-size="24" fill="#7a8098">Human-AI collaboration for machine learning and data visualisation</text>
+</svg>

@@ -1,0 +1,141 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { profile } from '../config';
+
+const all = await getCollection('projects');
+
+function sortByOrder<T extends (typeof all)[number]>(list: T[]) {
+  return [...list].sort((a, b) => {
+    const ao = a.data.order ?? Number.MAX_SAFE_INTEGER;
+    const bo = b.data.order ?? Number.MAX_SAFE_INTEGER;
+    if (ao !== bo) return ao - bo;
+    return (b.data.date?.getTime() ?? 0) - (a.data.date?.getTime() ?? 0);
+  });
+}
+
+const open = sortByOrder(all.filter((r) => r.data.status === 'open'));
+const closed = sortByOrder(all.filter((r) => r.data.status !== 'open'));
+
+const scholarships = [
+  {
+    year: '2026',
+    items: [
+      {
+        text: 'PhD scholarships for September 2026 start, open to UK and international students. Deadline 7 January 2026. This is very competitive — successful applicants usually have several strong publications already.',
+        href: 'https://jobs.nottingham.ac.uk/Vacancy.aspx?ref=SCI3046',
+        label: 'University listing',
+      },
+    ],
+  },
+  {
+    year: '2025',
+    items: [
+      {
+        text: 'LLM-based analysis of ancient Roman tablets, in collaboration with the British Museum. Open to international students; deadline 2 June 2025.',
+        href: 'https://jobs.nottingham.ac.uk/Vacancy.aspx?ref=ARTS124',
+        label: 'University listing',
+      },
+      {
+        text: 'Nottingham AI doctoral training centre scholarships for September 2025 start. UK students only; deadline 6 May 2025. Two topics I supervised: human-AI collaboration for medical data mapping using LLM recommendations, decision explanations and feedback, and LLM-aided ontology-based knowledge modelling for built-environment contract management.',
+        href: 'https://www.nottingham.ac.uk/computerscience/studywithus/postgraduateresearch/nottinghamdtcinai.aspx',
+        label: 'AIDC page',
+      },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Projects"
+  description="Project ideas for PhD, internship and MSc students, with scholarship and application details."
+>
+  <div class="container-page py-12 sm:py-16">
+    <header class="max-w-2xl">
+      <h1 class="font-serif text-3xl font-bold tracking-tight sm:text-4xl">Projects</h1>
+      <p class="prose-body mt-3 text-[var(--fg-muted)]">
+        Project ideas for students who want to work on human-AI collaboration, together with
+        current PhD scholarship information. Each project lists the technologies involved, so you
+        can judge the fit before applying.
+      </p>
+    </header>
+
+    <section class="mt-14">
+      <h2 class="font-serif text-xl font-semibold tracking-tight">PhD scholarships</h2>
+
+      <div class="mt-5 space-y-7">
+        {
+          scholarships.map((group) => (
+            <div>
+              <h3 class="font-sans text-xs font-semibold tracking-widest text-[var(--fg-subtle)] uppercase">
+                {group.year}
+              </h3>
+              <ul class="mt-3 space-y-4">
+                {group.items.map((item) => (
+                  <li class="border-l-2 border-[var(--color-accent-400)] pl-4">
+                    <p class="prose-body text-[0.95rem] text-[var(--fg-muted)]">
+                      {item.text}
+                      {item.href && (
+                        <a href={item.href} rel="noopener" target="_blank">
+                          {' '}
+                          {item.label} ↗
+                        </a>
+                      )}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    {
+      open.length > 0 && (
+        <section class="mt-14">
+          <h2 class="font-serif text-xl font-semibold tracking-tight">Looking for students</h2>
+          <div class="mt-5 space-y-5">
+            {open.map((entry) => (
+              <ProjectCard project={entry} open />
+            ))}
+          </div>
+        </section>
+      )
+    }
+
+    {
+      closed.length > 0 && (
+        <section class="mt-14">
+          <h2 class="font-serif text-xl font-semibold tracking-tight">Previous projects</h2>
+          <p class="mt-1 text-sm text-[var(--fg-subtle)]">
+            No longer recruiting students, but useful context on where this work has gone.
+          </p>
+          <div class="mt-5 space-y-5">
+            {closed.map((entry) => (
+              <ProjectCard project={entry} />
+            ))}
+          </div>
+        </section>
+      )
+    }
+
+    <section class="mt-14" id="getting-started">
+      <h2 class="font-serif text-xl font-semibold tracking-tight">Getting started</h2>
+      <div class="prose-body mt-3 max-w-none space-y-3 text-[var(--fg-muted)]">
+        <p>
+          If the machine-learning side of these projects is new to you,
+          <a href="https://www.deeplearning.ai/courses/generative-ai-for-everyone/" rel="noopener" target="_blank">Generative AI for Everyone</a>
+          is a good free starting point.
+        </p>
+        <p>
+          You can see how student projects here are typically structured and run in the
+          <a href="https://github.com/kaidatavis/student-projects" rel="noopener" target="_blank">student-projects repository</a>.
+          If something looks close to what you want but not quite right,
+          <a href={`mailto:${profile.email}`}>send me an email</a> — the list is not exhaustive.
+        </p>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

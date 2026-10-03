@@ -1,0 +1,124 @@
+---
+import { nav, profile } from '../config';
+import ThemeToggle from './ThemeToggle.astro';
+
+const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+
+function isActive(href: string) {
+  return currentPath === href || currentPath.startsWith(`${href}/`);
+}
+---
+
+<header
+  class="sticky top-0 z-40 border-b border-[var(--border)] bg-[color-mix(in_oklch,var(--bg)_88%,transparent)] backdrop-blur-md supports-backdrop-filter:bg-[color-mix(in_oklch,var(--bg)_78%,transparent)]"
+>
+  <div class="container-wide flex h-16 items-center justify-between gap-4">
+    <a href="/" class="group flex items-center gap-2.5 no-underline">
+      <span
+        class="grid size-8 shrink-0 place-items-center rounded-md bg-[var(--color-accent-700)] font-serif text-sm font-bold text-white dark:bg-[var(--color-accent-500)]"
+        >KX</span
+      >
+      <span class="flex flex-col leading-none">
+        <span class="font-serif text-[0.95rem] font-semibold tracking-tight text-[var(--fg)] group-hover:text-[var(--link)]"
+          >{profile.name}</span
+        >
+        <span class="mt-0.5 hidden text-[0.7rem] text-[var(--fg-subtle)] sm:block"
+          >{profile.institution}</span
+        >
+      </span>
+    </a>
+
+    <div class="flex items-center gap-1">
+      <nav aria-label="Main" class="hidden md:block">
+        <ul class="flex items-center gap-0.5">
+          {
+            nav.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  aria-current={isActive(item.href) ? 'page' : undefined}
+                  class:list={[
+                    'block rounded-md px-3 py-2 text-sm no-underline transition-colors',
+                    isActive(item.href)
+                      ? 'font-medium text-[var(--fg)] bg-[var(--bg-inset)]'
+                      : 'text-[var(--fg-muted)] hover:bg-[var(--bg-subtle)] hover:text-[var(--fg)]',
+                  ]}
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <ThemeToggle />
+
+      <button
+        type="button"
+        id="menu-button"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        aria-label="Open menu"
+        class="rounded-md p-2 text-[var(--fg-muted)] hover:bg-[var(--bg-subtle)] hover:text-[var(--fg)] md:hidden"
+      >
+        <svg
+          class="size-5"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.75"
+          stroke-linecap="round"
+          aria-hidden="true"
+        >
+          <path data-menu-icon="open" d="M4 7h16M4 12h16M4 17h16"></path>
+          <path data-menu-icon="close" d="M6 6l12 12M18 6L6 18" class="hidden"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div id="mobile-menu" hidden class="border-t border-[var(--border)] md:hidden">
+    <nav aria-label="Mobile" class="container-wide py-2">
+      <ul class="flex flex-col">
+        {
+          nav.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                aria-current={isActive(item.href) ? 'page' : undefined}
+                class:list={[
+                  'block rounded-md px-3 py-2.5 text-sm no-underline',
+                  isActive(item.href)
+                    ? 'font-medium text-[var(--fg)] bg-[var(--bg-inset)]'
+                    : 'text-[var(--fg-muted)]',
+                ]}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const button = document.getElementById('menu-button');
+  const menu = document.getElementById('mobile-menu');
+
+  if (button && menu) {
+    const iconOpen = button.querySelector('[data-menu-icon="open"]');
+    const iconClose = button.querySelector('[data-menu-icon="close"]');
+
+    button.addEventListener('click', () => {
+      const open = menu.hasAttribute('hidden');
+      menu.toggleAttribute('hidden', !open);
+      button.setAttribute('aria-expanded', String(open));
+      button.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      iconOpen?.classList.toggle('hidden', open);
+      iconClose?.classList.toggle('hidden', !open);
+    });
+  }
+</script>
