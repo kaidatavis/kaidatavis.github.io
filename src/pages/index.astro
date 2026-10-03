@@ -60,11 +60,15 @@ const highlights = [
         </h1>
 
         <p class="mt-3 text-lg leading-relaxed text-[var(--fg-muted)]">
-          {profile.title} at{" "}
+          <a href={profile.profileUrl} rel="noopener" target="_blank"
+            >{profile.title}</a
+          > at{" "}
           <a href={profile.schoolUrl} rel="noopener" target="_blank"
             >{profile.school}</a
           >,{" "}
-          {profile.institution}.
+          <a href={profile.institutionUrl} rel="noopener" target="_blank"
+            >{profile.institution}</a
+          >.
         </p>
 
         <p class="prose-body mt-1 text-[var(--fg-muted)]">

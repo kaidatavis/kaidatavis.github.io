@@ -15,6 +15,7 @@ export const profile = {
   headerSubtitle: 'Human-AI Collaboration',
   school: 'School of Computer Science',
   schoolUrl: 'https://www.nottingham.ac.uk/computerscience/',
+  profileUrl: 'https://www.nottingham.ac.uk/computerscience/people/kai.xu',
   location: 'Nottingham, UK',
   email: 'kai.xu@nottingham.ac.uk',
   tagline: 'Human-AI collaboration for machine learning and data visualisation.',
