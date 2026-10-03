@@ -10,6 +10,9 @@ export const profile = {
   role: 'Co-director, Visualisation Research Group (VisTAG)',
   institution: 'University of Nottingham',
   institutionUrl: 'https://www.nottingham.ac.uk/',
+  // Shown under your name in the site header. Separate from `institution`, which
+  // stays the university for the meta description, the intro and schema.org.
+  headerSubtitle: 'Human-AI Collaboration',
   school: 'School of Computer Science',
   schoolUrl: 'https://www.nottingham.ac.uk/computerscience/',
   location: 'Nottingham, UK',
