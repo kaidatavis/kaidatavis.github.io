@@ -96,20 +96,38 @@ preview the exact result first with `pnpm build && pnpm preview`.
 editing `src/` without committing a fresh `dist/` leaves the live site on the old
 build. `pnpm run deploy` is the only step that updates it.
 
-To set up a new repository:
+### Where the site is deployed from
 
-1. Create a GitHub repo and push this one to it.
-2. **Settings → Pages → Build and deployment → Source: GitHub Actions.**
-3. Point a `kaixu.me` A record at GitHub's Pages IPs (`185.199.108–111.153`).
-   `public/CNAME` is already set.
-4. Enable "Enforce HTTPS" once the certificate has been issued.
+This repo is a **user Pages site** (`kaidatavis.github.io`), so it is served at
+`https://kaidatavis.github.io/`. The canonical domain `kaixu.me` is not wired up
+yet.
 
-The first deployment takes a few minutes while the certificate is issued.
+`SITE_URL` decides both the origin and the path prefix, so the same source
+deploys to any of these without edits:
 
-### One thing to be aware of
+| `SITE_URL` | Serves at | `base` |
+| --- | --- | --- |
+| *(unset)* | `https://kaixu.me/` | `/` |
+| `https://kaidatavis.github.io` | `https://kaidatavis.github.io/` | `/` |
+| `https://example.github.io/repo` | `https://example.github.io/repo/` | `/repo/` |
 
-`astro.config.mjs` sets `trailingSlash: 'never'` with `build.format: 'directory'`.
-GitHub Pages serves directories at `/papers/` and redirects `/papers` there, so
-every internal link takes one redirect hop and the canonical URL drops the
-trailing slash. Setting `trailingSlash: 'always'` removes the hop. Decide before
-going live — changing it later invalidates existing URLs.
+`base` matters: without it Astro emits asset URLs at the origin root, and on a
+subdirectory deployment the stylesheet, favicon and images all 404. Every
+internal URL goes through `src/lib/routes.ts`, which joins `base` onto it.
+
+`dist/` is committed, so **changing `SITE_URL` requires a rebuild**:
+
+```sh
+SITE_URL=https://kaixu.me pnpm run deploy
+```
+
+To move to `kaixu.me` for real:
+
+1. Point a `kaixu.me` A record at GitHub's Pages IPs (`185.199.108–111.153`).
+   `public/CNAME` is already set, so no repo change is needed beyond the rebuild.
+2. Wait for the certificate, then enable "Enforce HTTPS" in
+   **Settings → Pages**.
+3. Deploy with `SITE_URL=https://kaixu.me` as above.
+
+Only the `<head>` and the redirect page use absolute URLs; all navigation is
+relative, so a rebuild is enough to move the whole site.
