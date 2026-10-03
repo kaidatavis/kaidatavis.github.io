@@ -5,7 +5,8 @@ University of Nottingham. Research on human-AI collaboration, machine learning
 and data visualisation.
 
 Built with [Astro](https://astro.build), Tailwind CSS 4 and pnpm. Static output,
-deployed to GitHub Pages on every push to `main`.
+published to GitHub Pages from the committed `docs/` folder on `main` — no build
+step runs in CI.
 
 ## Commands
 
@@ -13,15 +14,15 @@ deployed to GitHub Pages on every push to `main`.
 | :-------------------- | :------------------------------------------------------------ |
 | `pnpm install`        | Install dependencies                                           |
 | `pnpm dev`            | Dev server at `localhost:4321` (`pnpm astro dev --background` to detach) |
-| `pnpm build`          | Production build to `./dist/`                                  |
+| `pnpm build`          | Production build to `./docs/`                                 |
 | `pnpm preview`        | Serve the production build locally                             |
 | `pnpm run typecheck`  | `astro check` — types, including `.astro` files                |
 | `pnpm run bib:check`  | Validate `src/data/publications.bib` before it renders badly    |
-| `pnpm run deploy`     | Build, commit `dist/` and push it — publishes to GitHub Pages   |
+| `pnpm run deploy`     | Build, commit `docs/` and push it — publishes to GitHub Pages  |
 | `pnpm astro -- --help`| Astro CLI                                                      |
 
-`typecheck` and `bib:check` run in CI and do not block a deploy. Run them
-locally before pushing anyway.
+`typecheck` and `bib:check` run in CI as a quality gate on every push and
+pull request. Neither one deploys anything.
 
 ## Layout
 
@@ -41,7 +42,7 @@ src/
 ├── styles/global.css  Theme tokens, typography, utilities
 └── config.ts          Profile, social links, navigation
 
-dist/                  Built site, committed and deployed as-is
+docs/                  Built site: the folder GitHub Pages publishes
 ```
 
 ### Adding a project
@@ -73,14 +74,13 @@ the entry would render visibly wrong.
 
 ## Deployment
 
-GitHub Pages is served from the **committed `dist/` directory**, not from a build
-in CI. There are two workflows:
+GitHub Pages publishes the **committed `docs/` folder of `main`** straight from
+the branch. There is no build step in CI and no deploy workflow: what is
+committed is exactly what is served.
 
-- `deploy.yml` — uploads `dist/` to GitHub Pages. No toolchain, no `pnpm install`,
-  no build step: what is committed is exactly what goes live. It triggers only
-  when `dist/` changes.
-- `ci.yml` — runs `typecheck` and `bib:check` on pushes and pull requests. It
-  never builds or deploys.
+`ci.yml` is the only workflow. It runs `typecheck` and `bib:check` on pushes and
+pull requests so a broken `.astro` file or a malformed BibTeX entry is caught
+before it reaches `docs/`. It never builds or deploys.
 
 To publish a change:
 
@@ -88,13 +88,29 @@ To publish a change:
 pnpm run deploy
 ```
 
-That builds, commits `dist/` with the message `build: update pre-built output`,
-and pushes. If the build produced no change it stops before committing. You can
-preview the exact result first with `pnpm build && pnpm preview`.
+That builds into `docs/`, commits it with the message
+`build: update published site`, and pushes. If the build changed nothing it
+stops before committing. You can preview the exact result first with
+`pnpm build && pnpm preview`.
 
-**If you change source, rebuild.** Nothing regenerates `dist/` automatically, so
-editing `src/` without committing a fresh `dist/` leaves the live site on the old
-build. `pnpm run deploy` is the only step that updates it.
+**If you change source, rebuild.** Nothing regenerates `docs/` automatically, so
+editing `src/` without committing a fresh `docs/` leaves the live site on the
+old build. `pnpm run deploy` is the only step that updates it.
+
+The Pages setting must match this arrangement: **Settings → Pages → Build and
+deployment → Source: Deploy from a branch**, branch `main`, folder `/docs`.
+Leave the custom domain box empty until you move to `kaixu.me` — see below.
+
+### Why there is no CNAME file
+
+`public/CNAME` is deliberately absent. A branch-published Pages site *reads* a
+`CNAME` file from the publishing folder and adopts it as the custom domain
+immediately, without waiting for you to ask. With `kaixu.me` in there, Pages
+would try to serve the custom domain while DNS still points at the old host,
+and `kaidatavis.github.io` would redirect away.
+
+When you move to `kaixu.me`, set the custom domain in
+**Settings → Pages** instead, which is the same effect but under your control.
 
 ### Where the site is deployed from
 
@@ -115,7 +131,7 @@ deploys to any of these without edits:
 subdirectory deployment the stylesheet, favicon and images all 404. Every
 internal URL goes through `src/lib/routes.ts`, which joins `base` onto it.
 
-`dist/` is committed, so **changing `SITE_URL` requires a rebuild**:
+`docs/` is committed, so **changing `SITE_URL` requires a rebuild**:
 
 ```sh
 SITE_URL=https://kaixu.me pnpm run deploy
@@ -124,10 +140,14 @@ SITE_URL=https://kaixu.me pnpm run deploy
 To move to `kaixu.me` for real:
 
 1. Point a `kaixu.me` A record at GitHub's Pages IPs (`185.199.108–111.153`).
-   `public/CNAME` is already set, so no repo change is needed beyond the rebuild.
-2. Wait for the certificate, then enable "Enforce HTTPS" in
-   **Settings → Pages**.
+2. Enter `kaixu.me` in **Settings → Pages → Custom domain** and wait for the
+   DNS check to pass. Leave the CNAME file out of `public/` so nothing claims
+   the domain ahead of you.
 3. Deploy with `SITE_URL=https://kaixu.me` as above.
+4. Tick "Enforce HTTPS" once the certificate has been issued.
+
+Pages caches a deployment for up to ten minutes, so the switch is not instant.
+If a stale build lingers, Settings → Pages shows the deploy history.
 
 Only the `<head>` and the redirect page use absolute URLs; all navigation is
 relative, so a rebuild is enough to move the whole site.

@@ -17,6 +17,9 @@ export default defineConfig({
   // Pages serves each directory-format route at `<route>/`, so links must carry
   // the slash or every internal navigation pays a 301. See src/lib/routes.ts.
   trailingSlash: 'always',
+  // Pages publishes the `docs/` folder of this branch directly. Committing it
+  // means the site deploys from a branch with no GitHub Actions involved.
+  outDir: './docs',
   build: {
     format: 'directory',
   },

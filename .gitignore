@@ -1,6 +1,6 @@
 # build output
-# NOTE: dist/ is deliberately NOT ignored. GitHub Pages is deployed from the
-# committed static files, so the built site is the deployable artefact.
+# NOTE: docs/ is deliberately NOT ignored. GitHub Pages publishes the committed
+# docs/ folder from this branch, so the built site is the deployable artefact.
 
 # generated types
 .astro/

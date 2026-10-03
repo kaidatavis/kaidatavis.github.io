@@ -2,9 +2,8 @@
 #
 # Rebuild the static site and publish it to GitHub Pages.
 #
-# GitHub Pages is served from the committed dist/ directory, so this script
-# commits the freshly built output and pushes it. The deploy workflow then
-# uploads those exact files — no build runs in CI.
+# Pages serves the committed docs/ folder of this branch, so this script builds
+# into docs/, commits the result and pushes. No GitHub Actions involved.
 #
 set -euo pipefail
 
@@ -13,18 +12,19 @@ cd "$(dirname "$0")/.."
 echo "==> Building"
 pnpm run build
 
-echo "==> Staging dist/"
-git add dist
+echo "==> Staging docs/"
+git add docs
 
-if git diff --cached --quiet -- dist; then
-  echo "==> dist/ is already up to date; nothing to deploy."
+if git diff --cached --quiet -- docs; then
+  echo "==> docs/ is already up to date; nothing to deploy."
   exit 0
 fi
 
 echo "==> Committing"
-git commit -m "build: update pre-built output"
+git commit -m "build: update published site"
 
 echo "==> Pushing"
 git push
 
-echo "==> Done. The deploy workflow will publish to GitHub Pages."
+echo "==> Done. GitHub Pages republishes within a minute or two."
+echo "    If the site looks stale, Settings -> Pages will show the deploy status."
