@@ -3,10 +3,52 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { asset, route } from "../lib/routes";
 import Icon from "../components/Icon.astro";
 import { profile, socials } from "../config";
-import { doiUrl } from "../lib/publications";
-import { getRecentPublications } from "../lib/publications";
+import { doiUrl, getPublications } from "../lib/publications";
+import { grants } from "../data/funding";
+import { serviceGroups } from "../data/services";
 
-const recent = getRecentPublications(4);
+interface NewsItem {
+  kind: "Funding" | "Publication" | "Service";
+  title: string;
+  detail: string;
+  href: string;
+}
+
+/** Funding, papers and service roles from 2026. */
+const news: NewsItem[] = [
+  ...grants
+    .filter((grant) => grant.year === 2026)
+    .map((grant) => ({
+      kind: "Funding" as const,
+      title: grant.title,
+      detail: [grant.role, grant.amount].filter(Boolean).join(" · "),
+      href: route("/funding"),
+    })),
+  ...getPublications()
+    .filter(
+      (pub) =>
+        pub.year === 2026 &&
+        (pub.category === "Journal" || pub.category === "Conference"),
+    )
+    .map((pub) => ({
+      kind: "Publication" as const,
+      title: pub.title,
+      detail: `${pub.venue} · ${pub.year}`,
+      href: pub.doi ? doiUrl(pub.doi) : (pub.url ?? route("/papers")),
+    })),
+  ...serviceGroups
+    .flatMap((group) => group.items)
+    .filter((item) => item.years?.includes("2026"))
+    .map((item) => ({
+      kind: "Service" as const,
+      title:
+        item.role && item.venue
+          ? `${item.role}, ${item.venue}`
+          : (item.venue ?? item.role ?? ""),
+      detail: item.years ?? "",
+      href: route("/services"),
+    })),
+].slice(0, 8);
 
 const highlights = [
   {
@@ -150,37 +192,35 @@ const highlights = [
     </div>
   </section>
 
-  <!-- Recent publications -->
+  <!-- News -->
   {
-    recent.length > 0 && (
+    news.length > 0 && (
       <section class="container-page py-16">
         <div class="flex items-baseline justify-between gap-4">
-          <h2 class="font-serif text-xl font-semibold tracking-tight">
-            Recent publications
-          </h2>
-          <a
-            href={route("/papers")}
-            class="shrink-0 text-sm text-[var(--link)] no-underline hover:underline"
-          >
-            All papers →
-          </a>
+          <h2 class="font-serif text-xl font-semibold tracking-tight">News</h2>
+          <span class="shrink-0 font-sans text-sm text-[var(--fg-subtle)]">
+            2026
+          </span>
         </div>
 
         <ul class="mt-4 divide-y divide-[var(--border)] border-t border-[var(--border)]">
-          {recent.map((pub) => (
+          {news.map((item) => (
             <li class="py-4">
               <a
-                href={pub.doi ? doiUrl(pub.doi) : (pub.url ?? "/papers/")}
-                rel="noopener"
-                target="_blank"
+                href={item.href}
+                rel={item.href.startsWith("http") ? "noopener" : undefined}
+                target={item.href.startsWith("http") ? "_blank" : undefined}
                 class="block no-underline"
               >
                 <p class="font-medium text-[var(--fg)] group-hover:text-[var(--link)]">
-                  {pub.title}
+                  <span class="mr-2 inline-block rounded bg-[var(--bg-subtle)] px-1.5 py-0.5 align-middle font-sans text-[0.7rem] font-medium tracking-wide text-[var(--fg-muted)] uppercase">
+                    {item.kind}
+                  </span>
+                  {item.title}
                 </p>
-                <p class="mt-0.5 text-sm text-[var(--fg-muted)]">
-                  <span class="italic">{pub.venue}</span> · {pub.year}
-                </p>
+                {item.detail && (
+                  <p class="mt-0.5 text-sm text-[var(--fg-muted)]">{item.detail}</p>
+                )}
               </a>
             </li>
           ))}
