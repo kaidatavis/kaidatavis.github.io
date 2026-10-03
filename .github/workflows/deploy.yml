@@ -1,45 +1,45 @@
 name: Deploy to GitHub Pages
 
+# Deploys the pre-built static files committed in dist/. There is no build step
+# here on purpose: the artefact is whatever was last committed, so what you
+# preview locally is exactly what goes live.
+#
+# Run `pnpm run deploy` to rebuild dist/ and push it.
+
 on:
   push:
-    branches: [main]
+    paths:
+      - 'dist/**'
+      - '.github/workflows/deploy.yml'
   workflow_dispatch:
 
-# Required by GitHub Pages: write access for the deployment, and an OIDC token
-# so the deploy can be authorised without a long-lived token.
 permissions:
   contents: read
   pages: write
   id-token: write
 
 # Never cancel an in-flight deployment; queue instead, so the live site is
-# never left in a half-published state.
+# never left half-published.
 concurrency:
   group: pages
   cancel-in-progress: false
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v5
 
-      - uses: pnpm/action-setup@v4
-        # Version comes from the `packageManager` field in package.json.
-
-      - uses: actions/setup-node@v5
-        with:
-          node-version: 24
-          cache: pnpm
-
-      - run: pnpm install --frozen-lockfile
-
-      # Gate the deploy on the same checks run locally. `astro check` surfaces
-      # type errors in .astro files that the bundler happily ignores.
-      - run: pnpm run typecheck
-      - run: pnpm run bib:check
-
-      - run: pnpm run build
+      - name: Check dist/ is present
+        run: |
+          if [ ! -d dist ]; then
+            echo "::error::dist/ was not committed. Run 'pnpm run deploy' locally and push the result."
+            exit 1
+          fi
+          echo "Deploying $(find dist -type f | wc -l | tr -d ' ') files from dist/"
 
       - uses: actions/configure-pages@v5
 
@@ -47,12 +47,5 @@ jobs:
         with:
           path: dist
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
       - id: deployment
         uses: actions/deploy-pages@v4

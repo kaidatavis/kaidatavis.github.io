@@ -17,10 +17,11 @@ deployed to GitHub Pages on every push to `main`.
 | `pnpm preview`        | Serve the production build locally                             |
 | `pnpm run typecheck`  | `astro check` — types, including `.astro` files                |
 | `pnpm run bib:check`  | Validate `src/data/publications.bib` before it renders badly    |
+| `pnpm run deploy`     | Build, commit `dist/` and push it — publishes to GitHub Pages   |
 | `pnpm astro -- --help`| Astro CLI                                                      |
 
-`typecheck` and `bib:check` both run in CI and block a deploy, so run them
-locally before pushing.
+`typecheck` and `bib:check` run in CI and do not block a deploy. Run them
+locally before pushing anyway.
 
 ## Layout
 
@@ -39,6 +40,8 @@ src/
 ├── pages/             One file per route
 ├── styles/global.css  Theme tokens, typography, utilities
 └── config.ts          Profile, social links, navigation
+
+dist/                  Built site, committed and deployed as-is
 ```
 
 ### Adding a project
@@ -70,8 +73,30 @@ the entry would render visibly wrong.
 
 ## Deployment
 
-`.github/workflows/deploy.yml` builds and publishes to GitHub Pages. To set up a
-new repository:
+GitHub Pages is served from the **committed `dist/` directory**, not from a build
+in CI. There are two workflows:
+
+- `deploy.yml` — uploads `dist/` to GitHub Pages. No toolchain, no `pnpm install`,
+  no build step: what is committed is exactly what goes live. It triggers only
+  when `dist/` changes.
+- `ci.yml` — runs `typecheck` and `bib:check` on pushes and pull requests. It
+  never builds or deploys.
+
+To publish a change:
+
+```sh
+pnpm run deploy
+```
+
+That builds, commits `dist/` with the message `build: update pre-built output`,
+and pushes. If the build produced no change it stops before committing. You can
+preview the exact result first with `pnpm build && pnpm preview`.
+
+**If you change source, rebuild.** Nothing regenerates `dist/` automatically, so
+editing `src/` without committing a fresh `dist/` leaves the live site on the old
+build. `pnpm run deploy` is the only step that updates it.
+
+To set up a new repository:
 
 1. Create a GitHub repo and push this one to it.
 2. **Settings → Pages → Build and deployment → Source: GitHub Actions.**

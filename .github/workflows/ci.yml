@@ -1,0 +1,41 @@
+name: CI
+
+# Type and data checks, kept separate from the Pages deployment so that
+# deploying pre-built files needs no toolchain at all.
+#
+# These do not rebuild dist/. If they pass, the committed dist/ is only stale if
+# you changed source without rebuilding — `pnpm run deploy` is the fix.
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - 'dist/**'
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: pnpm/action-setup@v4
+        # Version comes from the `packageManager` field in package.json.
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      # `astro check` surfaces type errors in .astro files that the bundler
+      # happily ignores.
+      - run: pnpm run typecheck
+
+      - run: pnpm run bib:check

@@ -1,0 +1,159 @@
+<!DOCTYPE html><html lang="en" class="scheme-dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Human-Centred Agentic Science – Kai Xu</title><meta name="description" content="AI takes the repetitive half of scientific discovery — literature research, first-pass coding — while researchers keep control of hypotheses and interpretation."><link rel="canonical" href="https://kaixu.me/projects/agentic-science"><meta property="og:type" content="website"><meta property="og:site_name" content="Kai Xu"><meta property="og:title" content="Human-Centred Agentic Science – Kai Xu"><meta property="og:description" content="AI takes the repetitive half of scientific discovery — literature research, first-pass coding — while researchers keep control of hypotheses and interpretation."><meta property="og:url" content="https://kaixu.me/projects/agentic-science"><meta property="og:image" content="https://kaixu.me/og-default.svg"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Human-Centred Agentic Science – Kai Xu"><meta name="twitter:description" content="AI takes the repetitive half of scientific discovery — literature research, first-pass coding — while researchers keep control of hypotheses and interpretation."><meta name="twitter:image" content="https://kaixu.me/og-default.svg"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="alternate" type="application/rss+xml" title="Kai Xu – Publications" href="/rss.xml"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=JetBrains+Mono:wght@400&display=swap"><script>
+      // Applied before paint so the correct theme renders with no flash.
+      (() => {
+        const stored = localStorage.getItem('theme');
+        const prefersDark = matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = stored ?? (prefersDark ? 'dark' : 'light');
+        document.documentElement.classList.toggle('dark', theme === 'dark');
+        document.documentElement.classList.toggle('scheme-light', theme === 'light');
+      })();
+    </script><script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Kai Xu","alternateName":"徐凯","jobTitle":"Associate Professor in Computer Science","email":"mailto:kai.xu@nottingham.ac.uk","url":"https://kaixu.me/","affiliation":{"@type":"CollegeOrUniversity","name":"University of Nottingham"},"sameAs":["https://scholar.google.com/citations?user=sTfJNSIAAAAJ&hl=en","https://github.com/kaidatavis/","https://www.linkedin.com/in/kaidatavis/","https://www.youtube.com/channel/UCWIz8NDGqybv1ywKqTSHUnQ","https://bsky.app/profile/kaidatavis.bsky.social","https://www.nottingham.ac.uk/computerscience/people/kai.xu"]}</script><link rel="stylesheet" href="/_astro/BaseLayout.Dov7hnVx.css"></head><body class="min-h-screen"><a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-50 focus:rounded-md focus:bg-[var(--bg)] focus:px-4 focus:py-2 focus:shadow-lg">Skip to content</a><div class="flex min-h-screen flex-col"><header class="sticky top-0 z-40 border-b border-[var(--border)] bg-[color-mix(in_oklch,var(--bg)_88%,transparent)] backdrop-blur-md supports-backdrop-filter:bg-[color-mix(in_oklch,var(--bg)_78%,transparent)]"><div class="container-wide flex h-16 items-center justify-between gap-4"><a href="/" class="group flex items-center gap-2.5 no-underline"><span class="grid size-8 shrink-0 place-items-center rounded-md bg-[var(--color-accent-700)] font-serif text-sm font-bold text-white dark:bg-[var(--color-accent-500)]">KX</span><span class="flex flex-col leading-none"><span class="font-serif text-[0.95rem] font-semibold tracking-tight text-[var(--fg)] group-hover:text-[var(--link)]">Kai Xu</span><span class="mt-0.5 hidden text-[0.7rem] text-[var(--fg-subtle)] sm:block">University of Nottingham</span></span></a><div class="flex items-center gap-1"><nav aria-label="Main" class="hidden md:block"><ul class="flex items-center gap-0.5"><li><a href="/funding" class="block rounded-md px-3 py-2 text-sm no-underline transition-colors text-[var(--fg-muted)] hover:bg-[var(--bg-subtle)] hover:text-[var(--fg)]">Funding</a></li><li><a href="/papers" class="block rounded-md px-3 py-2 text-sm no-underline transition-colors text-[var(--fg-muted)] hover:bg-[var(--bg-subtle)] hover:text-[var(--fg)]">Papers</a></li><li><a href="/projects" aria-current="page" class="block rounded-md px-3 py-2 text-sm no-underline transition-colors font-medium text-[var(--fg)] bg-[var(--bg-inset)]">Projects</a></li><li><a href="/services" class="block rounded-md px-3 py-2 text-sm no-underline transition-colors text-[var(--fg-muted)] hover:bg-[var(--bg-subtle)] hover:text-[var(--fg)]">Services</a></li><li><a href="/bio" class="block rounded-md px-3 py-2 text-sm no-underline transition-colors text-[var(--fg-muted)] hover:bg-[var(--bg-subtle)] hover:text-[var(--fg)]">Bio</a></li></ul></nav><button type="button" id="theme-toggle" aria-label="Toggle colour theme" class="rounded-md p-2 text-[var(--fg-muted)] hover:bg-[var(--bg-subtle)] hover:text-[var(--fg)]"><svg class="size-5 dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg><svg class="hidden size-5 dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg></button><script type="module">document.getElementById(`theme-toggle`)?.addEventListener(`click`,()=>{let e=document.documentElement,t=e.classList.contains(`dark`)?`light`:`dark`;e.classList.toggle(`dark`,t===`dark`),e.classList.toggle(`scheme-light`,t===`light`),localStorage.setItem(`theme`,t)});</script><button type="button" id="menu-button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu" class="rounded-md p-2 text-[var(--fg-muted)] hover:bg-[var(--bg-subtle)] hover:text-[var(--fg)] md:hidden"><svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path data-menu-icon="open" d="M4 7h16M4 12h16M4 17h16"></path><path data-menu-icon="close" d="M6 6l12 12M18 6L6 18" class="hidden"></path></svg></button></div></div><div id="mobile-menu" hidden class="border-t border-[var(--border)] md:hidden"><nav aria-label="Mobile" class="container-wide py-2"><ul class="flex flex-col"><li><a href="/funding" class="block rounded-md px-3 py-2.5 text-sm no-underline text-[var(--fg-muted)]">Funding</a></li><li><a href="/papers" class="block rounded-md px-3 py-2.5 text-sm no-underline text-[var(--fg-muted)]">Papers</a></li><li><a href="/projects" aria-current="page" class="block rounded-md px-3 py-2.5 text-sm no-underline font-medium text-[var(--fg)] bg-[var(--bg-inset)]">Projects</a></li><li><a href="/services" class="block rounded-md px-3 py-2.5 text-sm no-underline text-[var(--fg-muted)]">Services</a></li><li><a href="/bio" class="block rounded-md px-3 py-2.5 text-sm no-underline text-[var(--fg-muted)]">Bio</a></li></ul></nav></div></header><script type="module">var e=document.getElementById(`menu-button`),t=document.getElementById(`mobile-menu`);if(e&&t){let n=e.querySelector(`[data-menu-icon="open"]`),r=e.querySelector(`[data-menu-icon="close"]`);e.addEventListener(`click`,()=>{let i=t.hasAttribute(`hidden`);t.toggleAttribute(`hidden`,!i),e.setAttribute(`aria-expanded`,String(i)),e.setAttribute(`aria-label`,i?`Close menu`:`Open menu`),n?.classList.toggle(`hidden`,i),r?.classList.toggle(`hidden`,!i)})}</script><main id="main" class="flex-1"><div class="container-page py-12 sm:py-16"><a href="/projects" class="inline-flex items-center gap-1 text-sm text-[var(--fg-subtle)] no-underline hover:text-[var(--link)] hover:underline"><svg class="size-3.5 rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>All projects</a><article class="mt-6"><header><div class="flex flex-wrap items-baseline gap-x-2.5 gap-y-1"><h1 class="font-serif text-3xl font-bold tracking-tight sm:text-4xl">Human-Centred Agentic Science</h1><span class="rounded-full bg-[var(--color-accent-700)] px-2 py-px font-sans text-[0.65rem] font-semibold tracking-wide text-white uppercase dark:bg-[var(--color-accent-500)] dark:text-[var(--color-accent-950)]">Open</span><span class="rounded-full border border-[var(--border-strong)] px-2 py-px font-sans text-[0.65rem] font-medium tracking-wide text-[var(--fg-subtle)] uppercase">PhD-scale</span><span class="text-sm text-[var(--fg-subtle)]">2026</span></div><p class="prose-body mt-4 text-lg leading-relaxed text-[var(--fg-muted)]">AI takes the repetitive half of scientific discovery — literature research, first-pass coding — while researchers keep control of hypotheses and interpretation.</p><ul class="mt-5 flex flex-wrap gap-1.5"><li class="rounded border border-[var(--border)] bg-[var(--bg-subtle)] px-2 py-0.5 font-sans text-[0.72rem] text-[var(--fg-subtle)]">LLM APIs</li><li class="rounded border border-[var(--border)] bg-[var(--bg-subtle)] px-2 py-0.5 font-sans text-[0.72rem] text-[var(--fg-subtle)]">Embeddings and vector search</li><li class="rounded border border-[var(--border)] bg-[var(--bg-subtle)] px-2 py-0.5 font-sans text-[0.72rem] text-[var(--fg-subtle)]">RAG</li><li class="rounded border border-[var(--border)] bg-[var(--bg-subtle)] px-2 py-0.5 font-sans text-[0.72rem] text-[var(--fg-subtle)]">Agentic workflows</li><li class="rounded border border-[var(--border)] bg-[var(--bg-subtle)] px-2 py-0.5 font-sans text-[0.72rem] text-[var(--fg-subtle)]">Interactive web UI</li></ul></header><div class="mt-6 flex flex-wrap gap-4 border-y border-[var(--border)] py-4"><a href="https://www.linkedin.com/pulse/human-centred-agentic-science-kai-xu-inkce" rel="noopener" target="_blank" class="inline-flex items-center gap-1.5 text-sm text-[var(--link)] no-underline hover:underline"><svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>Series overview (LinkedIn)</a><a href="https://www.linkedin.com/pulse/human-centred-agentic-science-2-literature-research-kai-xu-dpr2e" rel="noopener" target="_blank" class="inline-flex items-center gap-1.5 text-sm text-[var(--link)] no-underline hover:underline"><svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>Literature research (LinkedIn)</a><a href="https://www.linkedin.com/pulse/human-centred-agentic-science-3-qualitative-analysis-kai-xu-finhe" rel="noopener" target="_blank" class="inline-flex items-center gap-1.5 text-sm text-[var(--link)] no-underline hover:underline"><svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>Qualitative analysis (LinkedIn)</a><a href="https://arxiv.org/abs/2603.22648" rel="noopener" target="_blank" class="inline-flex items-center gap-1.5 text-sm text-[var(--link)] no-underline hover:underline"><svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>AwesomeLit paper</a><a href="https://vitality-vis.github.io/" rel="noopener" target="_blank" class="inline-flex items-center gap-1.5 text-sm text-[var(--link)] no-underline hover:underline"><svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>vitaLITy 2</a></div><div class="prose-body mt-8 space-y-4 [&amp;&gt;*:first-child]:mt-0"><p>An ongoing research programme, written up as a
+<a href="https://www.linkedin.com/pulse/human-centred-agentic-science-kai-xu-inkce">three-part series on LinkedIn</a>:
+an overview, then a deep dive on literature research and on qualitative analysis.</p>
+<h2 id="why-not-full-automation">Why not full automation</h2>
+<p>AI already sits behind some of the most significant results in science. The 2024
+Nobel Prize in Chemistry recognised machine learning work on protein structure
+prediction — a problem that had been open for decades and remains fundamental
+across biology and medicine.</p>
+<p>It can also automate discovery end to end. Sakana AI’s
+<a href="https://sakana.ai/ai-scientist-first-publication/">AI Scientist</a> takes an initial
+input, generates ideas, writes the code, designs and runs the evaluation, and
+writes the result up as a paper. One of its papers was accepted at an
+<a href="https://sites.google.com/view/icbinb-2025">ICLR 2025 workshop</a>: the organisers
+knew it was machine-generated, but the reviewers did not.</p>
+<p>That is not where I want to aim. Current models are capable and improving
+quickly, but they remain weak in the specific place scientific work is hard. They
+can retrieve and summarise, yet I have not seen an assistant that grasps the
+nuance of the technical solutions papers propose, or the relationships <em>between</em>
+papers — which is how research has been done for centuries. Hypothesis generation
+is the weakest link of all: the space of possible ideas is astronomical, so
+choosing the right one needs judgement that humans are simply better at.</p>
+<p>The target is therefore the middle: <strong>the human keeps control, the AI does the
+time-consuming half.</strong> Quality of discovery stays human; speed comes from
+automation.</p>
+<h2 id="why-per-stage-not-end-to-end">Why per-stage, not end-to-end</h2>
+<p>Breakthroughs like AlphaFold are extraordinary but narrow, and the approach will
+not scale on its own: not every scientist can assemble a large team of AI
+specialists to work on their particular question. There is real value in a
+complementary approach that helps across a much wider range of problems, and
+ideally across disciplines.</p>
+<p>So the plan is to build support for each stage of discovery in turn and integrate
+them afterwards. Each piece is useful in its own right before the integration ever
+happens, and it complements ambitious end-to-end systems such as
+<a href="https://github.com/InternScience/InternAgent">InternAgent</a> and
+<a href="https://analemma.ai/fars/">FARS</a> rather than competing with them.</p>
+<ol>
+<li><strong>Literature research</strong> — finding, understanding and synthesising work, and
+identifying the gap.</li>
+<li><strong>Hypothesis generation</strong> — coming up with what is worth testing.</li>
+<li><strong>Implementation</strong> — writing and debugging the code.</li>
+<li><strong>Evaluation</strong> — designing and running experiments.</li>
+<li><strong>Write-up</strong> — turning results into an argument.</li>
+</ol>
+<p>Each stage needs support that beats an off-the-shelf model or agent, and how much
+specialisation it needs will differ: implementation probably needs more than
+literature research. The pipeline itself will also have to differ by discipline —
+a better machine learning model is a different job from a social science study.
+Both are open questions, and I would like to hear ideas.</p>
+<h2 id="stage-1-literature-research">Stage 1: literature research</h2>
+<p>It is tempting to call a chatbot’s “deep research” mode a solved problem, and in
+one narrow sense it is: give it a topic and it finds relevant papers and
+summarises them sensibly. That is enough for a quick orientation, but not for
+research. Three gaps recur:</p>
+<ul>
+<li><strong>Recency.</strong> Training data has a cut-off, so without live web search it misses
+the newest work.</li>
+<li><strong>Coverage.</strong> Much of the literature is paywalled. ArXiv and SSRN help, but
+relying on them alone gives incomplete results.</li>
+<li><strong>Depth.</strong> I suspect most tools work from title and abstract only — either
+because they lack access to full text or because they cannot handle it.
+ChatGPT’s 4000-token context window is a useful reminder of the latter.</li>
+</ul>
+<p>The same limitations apply to tools built specifically for the job, such as
+<a href="https://asta.allen.ai/">Asta</a> and <a href="https://consensus.app/">Consensus</a>.</p>
+<p>The goal I care about goes past search: understanding the work, synthesising the
+knowledge, and identifying the research gap. AI may be able to do all three — but
+how <em>humans</em> understand papers and see gaps is the interesting part, and cannot be
+fully automated. AI can only help.</p>
+<p>Organising this by user goal gives a useful split:</p>
+<ul>
+<li><strong>G1 — get an overview of a topic.</strong> Largely solved, so not where I would work.</li>
+<li><strong>G2 — identify a research gap.</strong> The sweet spot for current research.</li>
+<li><strong>G3 — generate new hypotheses.</strong> Harder and more exciting, but a bridge too
+far for now.</li>
+</ul>
+<p>Goals also vary with how familiar the user is with the field, though the two
+correlate: someone new to a field is unlikely to be publishing in it.</p>
+<h3 id="vitality-2-retrieval-over-a-focused-corpus"><a href="https://vitality-vis.github.io/">vitaLITy 2</a>: retrieval over a focused corpus</h3>
+<p>vitaLITy 2 targets G2. It builds on vitaLITy, which predates modern LLMs and was
+mostly a manual literature research tool; the new version swaps BERT/SPECTER
+embeddings for GPT embeddings, adds RAG so it can handle a large collection, and
+adds a chat interface for natural-language questions.</p>
+<p>The decision that matters is scope. Rather than all of computer science, the
+corpus focuses on data visualisation, with related work from HCI and databases,
+cutting the collection to roughly 70–80k papers — a size that can be handled
+properly. A <a href="https://research.google/blog/testing-llms-on-superconductivity-research-questions/">recent Google study</a>
+found that expert-selected sources beat systems with full internet access, which is
+exactly this bet. The next step is letting people bring their own collection, for
+example from Zotero, so the analysis is hyper-personalised.</p>
+<h3 id="awesomelit-agentic-search-steered-by-feedback">AwesomeLit: agentic search steered by feedback</h3>
+<p>Retrieval alone is not enough, so <a href="https://arxiv.org/abs/2603.22648">AwesomeLit</a>
+iteratively refines the literature research based on user feedback. You start from
+something broad like <em>data visualisation for explainable AI</em>, rate the sub-topics
+and papers it proposes, and steer it towards the question you actually care about.
+The exploration history is captured and visualised as a tree, which makes
+reflection and planning easier. The paper and system will be online shortly.</p>
+<h2 id="a-second-stage-qualitative-analysis">A second stage: qualitative analysis</h2>
+<p>Qualitative research works on unstructured data — interview transcripts,
+open-ended responses, documents — across HCI, health, psychology, sociology, law
+and business. Its analysis is mostly not numerical, and the interesting question
+is not only what people said but why.</p>
+<p>The bottleneck is labour. Coding transcripts against a code book means assigning
+themes to passages, with sentiment themes like positive/negative/neutral and
+reason themes that are more varied and often hierarchical. An hour of interview
+can take several hours to code, and a study takes weeks or months. That cost
+limits the science directly: more interviews mean patterns that are more general
+and less likely to miss rare but important cases.</p>
+<p>Machine learning has been used here for a long time — LDA, then Word2Vec and
+GloVe — but LLMs change accessibility more than accuracy. You can instruct a model
+in prose, with no code, which matters for researchers who do not program. It is
+also contested: <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5676462">a statement signed by many HCI
+researchers</a> argues
+that generative AI should not be used for qualitative analysis at all.</p>
+<p>The goal here is explicitly not automation. Models remain weaker than domain
+experts, and qualitative analysis is subjective by nature — each researcher’s
+interpretation is legitimate, and that diversity is a feature of the method, not a
+defect to be corrected. The aim is to let the model do the repetitive part and the
+human do the creative part, cutting effort by perhaps half, a quarter, or even a
+tenth. Open questions:</p>
+<ul>
+<li>Can a model produce a good rough first pass, given the code book, the
+transcript, and a few human-coded examples?</li>
+<li>Can iterative feedback teach it what <em>this</em> researcher wants to extract?</li>
+<li>Can it help reconcile disagreements between multiple coders?</li>
+</ul>
+<h3 id="co-refine-consistency-while-coding">Co-Refine: consistency while coding</h3>
+<p>After talking to several qualitative researchers, the recurring problem turned out
+to be consistency — applying a theme consistently across a long analysis. One
+person drifts over months, and several coders reading the same theme differently is
+worse.</p>
+<p>Co-Refine is the tool being built for it. The code book and its themes sit on the
+left, the transcript in the middle where themes are assigned, and an LLM panel on
+the right. When the model thinks a theme has been applied inconsistently it raises
+a notification with its reasoning, and the researcher checks it and decides
+whether to accept the change. This runs <em>live</em>, alongside coding, but can also be
+used afterwards as a consistency pass — which tends to suggest more changes. It is
+still in development, and a demo will follow.</p>
+<h2 id="what-this-could-change">What this could change</h2>
+<p>This is a question for the whole research community rather than one discipline,
+and I think the question is when, not whether. When AI meaningfully changes how
+discovery is done, it changes our idea of what research is — not just academic, but
+social, political, economic and cultural.</p>
+<p>There is also the question of AI improving itself. The capability to support
+scientific discovery <em>is</em> the capability to improve AI, since generative AI
+already grew out of research results. AI is already improving itself, just not yet
+at the level of the next transformer. Once self-improvement breaks through the
+incremental-improvement ceiling, AI could evolve without humans in the loop — and
+what would it still need us for? That may matter more than AGI, and I do not have
+an answer either.</p>
+</div></article><p class="mt-12 border-t border-[var(--border)] pt-6 text-sm text-[var(--fg-subtle)]">Interested in this work? <a href="/projects#getting-started">See how to get started</a>or <a href="mailto:kai.xu@nottingham.ac.uk">email me</a>.</p></div></main><footer class="mt-24 border-t border-[var(--border)] bg-[var(--bg-subtle)]"><div class="container-wide py-12"><div class="flex flex-col gap-10 sm:flex-row sm:justify-between"><div class="max-w-sm"><div class="flex items-center gap-2.5"><span class="grid size-8 shrink-0 place-items-center rounded-md bg-[var(--color-accent-700)] font-serif text-sm font-bold text-white dark:bg-[var(--color-accent-500)]">KX</span><span class="font-serif font-semibold tracking-tight">Kai Xu</span></div><p class="mt-3 text-sm leading-relaxed text-[var(--fg-muted)]">Human-AI collaboration for machine learning and data visualisation.</p><a href="mailto:kai.xu@nottingham.ac.uk" class="mt-3 inline-flex items-center gap-1.5 text-sm text-[var(--link)] no-underline hover:underline"><svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><path d="m22 7-10 6L2 7"/></svg>kai.xu@nottingham.ac.uk</a></div><div><h2 class="font-sans text-xs font-semibold tracking-wider text-[var(--fg-subtle)] uppercase">Pages</h2><ul class="mt-3 grid grid-cols-2 gap-x-8 gap-y-1.5"><li><a href="/funding" class="text-sm text-[var(--fg-muted)] no-underline hover:text-[var(--link)] hover:underline">Funding</a></li><li><a href="/papers" class="text-sm text-[var(--fg-muted)] no-underline hover:text-[var(--link)] hover:underline">Papers</a></li><li><a href="/projects" class="text-sm text-[var(--fg-muted)] no-underline hover:text-[var(--link)] hover:underline">Projects</a></li><li><a href="/services" class="text-sm text-[var(--fg-muted)] no-underline hover:text-[var(--link)] hover:underline">Services</a></li><li><a href="/bio" class="text-sm text-[var(--fg-muted)] no-underline hover:text-[var(--link)] hover:underline">Bio</a></li></ul></div><div><h2 class="font-sans text-xs font-semibold tracking-wider text-[var(--fg-subtle)] uppercase">Elsewhere</h2><ul class="mt-3 grid grid-cols-2 gap-x-6 gap-y-1.5"><li><a href="https://scholar.google.com/citations?user=sTfJNSIAAAAJ&amp;hl=en" rel="me noopener" target="_blank" class="inline-flex items-center gap-1.5 text-sm text-[var(--fg-muted)] no-underline hover:text-[var(--link)] hover:underline"><svg class="size-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 1 9l11 6 9-4.91V17h2V9L12 3z"/><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg>Google Scholar</a></li><li><a href="https://github.com/kaidatavis/" rel="me noopener" target="_blank" class="inline-flex items-center gap-1.5 text-sm text-[var(--fg-muted)] no-underline hover:text-[var(--link)] hover:underline"><svg class="size-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>GitHub</a></li><li><a href="https://www.linkedin.com/in/kaidatavis/" rel="me noopener" target="_blank" class="inline-flex items-center gap-1.5 text-sm text-[var(--fg-muted)] no-underline hover:text-[var(--link)] hover:underline"><svg class="size-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>LinkedIn</a></li><li><a href="https://www.youtube.com/channel/UCWIz8NDGqybv1ywKqTSHUnQ" rel="me noopener" target="_blank" class="inline-flex items-center gap-1.5 text-sm text-[var(--fg-muted)] no-underline hover:text-[var(--link)] hover:underline"><svg class="size-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><path d="m9.75 15.02 5.75-3.27-5.75-3.27v6.54z"/></svg>YouTube</a></li><li><a href="https://bsky.app/profile/kaidatavis.bsky.social" rel="me noopener" target="_blank" class="inline-flex items-center gap-1.5 text-sm text-[var(--fg-muted)] no-underline hover:text-[var(--link)] hover:underline"><svg class="size-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 10.8c-1.1-2.13-3.83-6.1-6.29-7.77C3.16 1.5 2.02 1.65 1.3 1.9c-.62.21-.72.78-.72 1.32 0 .54.32 4.5.51 5.16.65 2.24 2.98 3 5.11 2.76-3.74.55-7.05 2.01-2.71 7.1 4.95 5.77 6.81-.94 7.71-3.55.9 2.61 2.19 9.28 7.13 3.55 4.34-5.09 1.03-6.55-2.71-7.1 2.13.24 4.46-.52 5.11-2.76.19-.66.51-4.62.51-5.16 0-.54-.1-1.11-.72-1.32-.72-.25-1.86-.4-4.41 1.13-2.46 1.67-5.19 5.64-6.29 7.77z"/></svg>Bluesky</a></li><li><a href="https://www.nottingham.ac.uk/computerscience/people/kai.xu" rel="me noopener" target="_blank" class="inline-flex items-center gap-1.5 text-sm text-[var(--fg-muted)] no-underline hover:text-[var(--link)] hover:underline"><svg class="size-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 9 12 4 2 9l10 5 10-5z"/><path d="M6 11.5V16c0 1.66 2.69 3 6 3s6-1.34 6-3v-4.5"/><path d="M22 9v6"/></svg>University Profile</a></li></ul></div></div><div class="mt-10 flex flex-col gap-2 border-t border-[var(--border)] pt-6 text-xs text-[var(--fg-subtle)] sm:flex-row sm:items-center sm:justify-between"><p>&copy; 2026 Kai Xu. Content licensed CC BY 4.0 unless noted.</p><p>Built with <a href="https://astro.build" rel="noopener" class="text-[var(--fg-muted)]">Astro</a></p></div></div></footer></div></body></html>

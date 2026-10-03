@@ -1,5 +1,7 @@
 # build output
-dist/
+# NOTE: dist/ is deliberately NOT ignored. GitHub Pages is deployed from the
+# committed static files, so the built site is the deployable artefact.
+
 # generated types
 .astro/
 
