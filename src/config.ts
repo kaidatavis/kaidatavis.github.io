@@ -7,7 +7,11 @@ export const profile = {
   name: 'Kai Xu',
   nameLocal: '徐凯',
   title: 'Associate Professor',
-  role: 'Co-director, Visualisation Research Group (VisTAG)',
+  role: 'Co-director, Visualization, Text Analytics, and Graphics Group (VisTAG)',
+  vistag: {
+    name: 'The Visualization, Text Analytics, and Graphics Group',
+    url: 'https://www.nottingham.ac.uk/computerscience/research/visualization-and-computer-graphics/visualization-and-computer-graphics.aspx',
+  },
   institution: 'University of Nottingham',
   institutionUrl: 'https://www.nottingham.ac.uk/',
   // Shown under your name in the site header. Separate from `institution`, which
