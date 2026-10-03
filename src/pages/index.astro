@@ -12,6 +12,26 @@ interface NewsItem {
   title: string;
   detail: string;
   href: string;
+  /** Thumbnail under /images/news. Omitted when no image is available. */
+  image?: string;
+}
+
+/** Paper figure by title keyword. Titles come from the .bib file. */
+function paperImage(title: string): string | undefined {
+  if (title.includes("AwesomeLit")) return "/images/news/awesomelit.jpg";
+  if (title.includes("NotebookRAG")) return "/images/news/notebookrag.jpg";
+  if (title.includes("epidemiological models for policy"))
+    return "/images/news/frontiers-epi.jpg";
+  if (title.includes("Mixed Initiative")) return "/images/news/cgf-survey.jpg";
+  return undefined;
+}
+
+/** Venue logo by venue keyword. */
+function serviceImage(title: string): string | undefined {
+  if (title.includes("EuroVis")) return "/images/news/eurographics.jpg";
+  if (title.includes("UKRI")) return "/images/news/ukri-logo.svg";
+  if (title.includes("IEEE")) return "/images/news/ieee-logo.svg";
+  return undefined;
 }
 
 /** Funding, papers and service roles from 2026. */
@@ -23,6 +43,7 @@ const news: NewsItem[] = [
       title: grant.title,
       detail: [grant.role, grant.amount].filter(Boolean).join(" · "),
       href: route("/funding"),
+      image: "/images/news/uon-logo.svg",
     })),
   ...getPublications()
     .filter(
@@ -35,19 +56,24 @@ const news: NewsItem[] = [
       title: pub.title,
       detail: `${pub.venue} · ${pub.year}`,
       href: pub.doi ? doiUrl(pub.doi) : (pub.url ?? route("/papers")),
+      image: paperImage(pub.title),
     })),
   ...serviceGroups
     .flatMap((group) => group.items)
     .filter((item) => item.years?.includes("2026"))
-    .map((item) => ({
-      kind: "Service" as const,
-      title:
+    .map((item) => {
+      const title =
         item.role && item.venue
           ? `${item.role}, ${item.venue}`
-          : (item.venue ?? item.role ?? ""),
-      detail: item.years ?? "",
-      href: route("/services"),
-    })),
+          : (item.venue ?? item.role ?? "");
+      return {
+        kind: "Service" as const,
+        title,
+        detail: item.years ?? "",
+        href: route("/services"),
+        image: serviceImage(title),
+      };
+    }),
 ].slice(0, 8);
 
 const highlights = [
@@ -210,17 +236,30 @@ const highlights = [
                 href={item.href}
                 rel={item.href.startsWith("http") ? "noopener" : undefined}
                 target={item.href.startsWith("http") ? "_blank" : undefined}
-                class="block no-underline"
+                class="flex items-center gap-4 no-underline"
               >
-                <p class="font-medium text-[var(--fg)] group-hover:text-[var(--link)]">
-                  <span class="mr-2 inline-block rounded bg-[var(--bg-subtle)] px-1.5 py-0.5 align-middle font-sans text-[0.7rem] font-medium tracking-wide text-[var(--fg-muted)] uppercase">
-                    {item.kind}
-                  </span>
-                  {item.title}
-                </p>
-                {item.detail && (
-                  <p class="mt-0.5 text-sm text-[var(--fg-muted)]">{item.detail}</p>
+                {item.image && (
+                  <img
+                    src={asset(item.image)}
+                    alt=""
+                    width="128"
+                    height="96"
+                    loading="lazy"
+                    decoding="async"
+                    class="h-20 w-28 shrink-0 rounded-md border border-[var(--border)] bg-white object-contain"
+                  />
                 )}
+                <div class="min-w-0">
+                  <p class="font-medium text-[var(--fg)] group-hover:text-[var(--link)]">
+                    <span class="mr-2 inline-block rounded bg-[var(--bg-subtle)] px-1.5 py-0.5 align-middle font-sans text-[0.7rem] font-medium tracking-wide text-[var(--fg-muted)] uppercase">
+                      {item.kind}
+                    </span>
+                    {item.title}
+                  </p>
+                  {item.detail && (
+                    <p class="mt-0.5 text-sm text-[var(--fg-muted)]">{item.detail}</p>
+                  )}
+                </div>
               </a>
             </li>
           ))}
