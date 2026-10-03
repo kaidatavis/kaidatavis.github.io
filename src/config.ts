@@ -22,7 +22,7 @@ export const profile = {
   profileUrl: 'https://www.nottingham.ac.uk/computerscience/people/kai.xu',
   location: 'Nottingham, UK',
   email: 'kai.xu@nottingham.ac.uk',
-  tagline: 'Human-AI collaboration for machine learning and data visualisation.',
+  tagline: 'Human-AI collaboration',
   photo: {
     src: '/images/kai.jpg',
     alt: 'Kai Xu',

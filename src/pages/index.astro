@@ -68,7 +68,7 @@ const highlights = [
           >,{" "}
           <a href={profile.institutionUrl} rel="noopener" target="_blank"
             >{profile.institution}</a
-          >.
+          >, UK.
         </p>
 
         <div class="mt-5 flex flex-wrap items-center gap-2">
@@ -133,46 +133,20 @@ const highlights = [
         <strong>Data Visualisation</strong>. The latter is about presenting data
         visually so that people can find patterns using human cognition and
         domain knowledge. Currently I focus on{" "}
-        <strong>human-centred AI</strong>: collaboration and teaming between
-        people and machine learning systems, because the best results usually
-        come from working together rather than either alone.
+        <strong>Human-AI Collaboration</strong>, particularly <a
+          href="https://www.linkedin.com/pulse/human-centred-agentic-science-kai-xu-inkce/"
+          rel="noopener"
+          target="_blank">AI Co-Scientist</a
+        >, to transform scientific discovery.
       </p>
 
       <p>
-        I have led research projects with a total value of over <strong
+        I have led many research projects with a total value of over <strong
           >£12 million</strong
         >, funded by UK and EU research councils (EPSRC, EU Framework
         Programme), government bodies (Ministry of Defence, Dstl, US Department
         of Homeland Security) and industry (Microsoft, British Telecom).
       </p>
-    </div>
-  </section>
-
-  <!-- Highlights -->
-  <section class="container-page py-6">
-    <div class="grid gap-4 sm:grid-cols-3">
-      {
-        highlights.map((item) => (
-          <a
-            href={route(item.href)}
-            class="group flex flex-col rounded-lg border border-[var(--border)] bg-[var(--bg-subtle)] p-5 no-underline transition-colors hover:border-[var(--color-accent-400)] hover:bg-[var(--bg-inset)]"
-          >
-            <h2 class="font-serif text-base font-semibold text-[var(--fg)] group-hover:text-[var(--link)]">
-              {item.title}
-            </h2>
-            <p class="mt-1.5 flex-1 text-sm leading-relaxed text-[var(--fg-muted)]">
-              {item.body}
-            </p>
-            <span class="mt-3 inline-flex items-center gap-1 text-sm font-medium text-[var(--link)]">
-              {item.cta}
-              <Icon
-                name="arrowRight"
-                class="size-3.5 transition-transform group-hover:translate-x-0.5"
-              />
-            </span>
-          </a>
-        ))
-      }
     </div>
   </section>
 
