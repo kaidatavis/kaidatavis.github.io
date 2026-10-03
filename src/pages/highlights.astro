@@ -1,9 +1,9 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import { grants } from '../data/funding';
-import { serviceGroups } from '../data/services';
-import { awards } from '../data/awards';
-import { route } from '../lib/routes';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { grants } from "../data/funding";
+import { serviceGroups } from "../data/services";
+import { awards } from "../data/awards";
+import { route } from "../lib/routes";
 
 /** Each section shows at most this many entries, newest first. */
 const LIMIT = 4;
@@ -15,7 +15,9 @@ function startYear(years: string | undefined): number {
 }
 
 /** Newest first, ties keeping the order the data files list them in. */
-const allGrants = grants.filter((grant) => grant.highlight).sort((a, b) => startYear(b.period) - startYear(a.period));
+const allGrants = grants
+  .filter((grant) => grant.highlight)
+  .sort((a, b) => startYear(b.period) - startYear(a.period));
 const allServices = serviceGroups
   .flatMap((group) => group.items.filter((item) => item.highlight))
   .sort((a, b) => startYear(b.years) - startYear(a.years));
@@ -31,18 +33,18 @@ const description = `Selected grants, professional service and awards: ${highlig
 <BaseLayout title="Highlights" description={description}>
   <div class="container-page py-12 sm:py-16">
     <header class="max-w-2xl">
-      <h1 class="font-serif text-3xl font-bold tracking-tight sm:text-4xl">Highlights</h1>
-      <p class="prose-body mt-3 text-[var(--fg-muted)]">
-        The grants and professional roles I have marked as highlights on my CV. Amounts are as
-        recorded at the time of award, and some are total project values rather than my own share.
-      </p>
+      <h1 class="font-serif text-3xl font-bold tracking-tight sm:text-4xl">
+        Highlights
+      </h1>
     </header>
 
     <section class="mt-14">
       <div class="flex flex-wrap items-baseline justify-between gap-4">
-        <h2 class="font-serif text-xl font-semibold tracking-tight">Research funding</h2>
+        <h2 class="font-serif text-xl font-semibold tracking-tight">
+          Research funding
+        </h2>
         <a
-          href={route('/funding')}
+          href={route("/funding")}
           class="shrink-0 text-sm text-[var(--link)] no-underline hover:underline"
         >
           All {grants.length} grants →
@@ -78,7 +80,9 @@ const description = `Selected grants, professional service and awards: ${highlig
               </dl>
 
               {grant.funder && (
-                <p class="mt-1 font-sans text-[0.8rem] text-[var(--fg-muted)]">{grant.funder}</p>
+                <p class="mt-1 font-sans text-[0.8rem] text-[var(--fg-muted)]">
+                  {grant.funder}
+                </p>
               )}
             </li>
           ))
@@ -88,9 +92,11 @@ const description = `Selected grants, professional service and awards: ${highlig
 
     <section class="mt-14">
       <div class="flex flex-wrap items-baseline justify-between gap-4">
-        <h2 class="font-serif text-xl font-semibold tracking-tight">Professional service</h2>
+        <h2 class="font-serif text-xl font-semibold tracking-tight">
+          Professional service
+        </h2>
         <a
-          href={route('/services')}
+          href={route("/services")}
           class="shrink-0 text-sm text-[var(--link)] no-underline hover:underline"
         >
           All roles →
@@ -104,9 +110,14 @@ const description = `Selected grants, professional service and awards: ${highlig
               <p class="font-serif text-base leading-snug font-semibold tracking-tight">
                 {item.role && item.venue ? (
                   <>
-                    {item.role},{' '}
+                    {item.role},{" "}
                     {item.url ? (
-                      <a href={item.url} rel="noopener" target="_blank" class="no-underline hover:underline">
+                      <a
+                        href={item.url}
+                        rel="noopener"
+                        target="_blank"
+                        class="no-underline hover:underline"
+                      >
                         {item.venue}
                       </a>
                     ) : (
@@ -123,7 +134,9 @@ const description = `Selected grants, professional service and awards: ${highlig
                 </p>
               )}
               {item.note && (
-                <p class="prose-body mt-1 text-[0.9rem] text-[var(--fg-muted)]">{item.note}</p>
+                <p class="prose-body mt-1 text-[0.9rem] text-[var(--fg-muted)]">
+                  {item.note}
+                </p>
               )}
             </li>
           ))
@@ -135,7 +148,7 @@ const description = `Selected grants, professional service and awards: ${highlig
       <div class="flex flex-wrap items-baseline justify-between gap-4">
         <h2 class="font-serif text-xl font-semibold tracking-tight">Awards</h2>
         <a
-          href={route('/bio')}
+          href={route("/bio")}
           class="shrink-0 text-sm text-[var(--link)] no-underline hover:underline"
         >
           More on bio →
@@ -153,7 +166,9 @@ const description = `Selected grants, professional service and awards: ${highlig
                 {award.year} · {award.venue}
               </p>
               {award.note && (
-                <p class="prose-body mt-1 text-[0.9rem] text-[var(--fg-muted)]">{award.note}</p>
+                <p class="prose-body mt-1 text-[0.9rem] text-[var(--fg-muted)]">
+                  {award.note}
+                </p>
               )}
             </li>
           ))
