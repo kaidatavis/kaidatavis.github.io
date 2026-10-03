@@ -77,10 +77,12 @@ const scholarships = [
                     <p class="prose-body text-[0.95rem] text-[var(--fg-muted)]">
                       {item.text}
                       {item.href && (
-                        <a href={item.href} rel="noopener" target="_blank">
+                        <>
                           {' '}
-                          {item.label} ↗
-                        </a>
+                          <a href={item.href} rel="noopener" target="_blank">
+                            {item.label} ↗
+                          </a>
+                        </>
                       )}
                     </p>
                   </li>
@@ -125,14 +127,14 @@ const scholarships = [
       <h2 class="font-serif text-xl font-semibold tracking-tight">Getting started</h2>
       <div class="prose-body mt-3 max-w-none space-y-3 text-[var(--fg-muted)]">
         <p>
-          If the machine-learning side of these projects is new to you,
-          <a href="https://www.deeplearning.ai/courses/generative-ai-for-everyone/" rel="noopener" target="_blank">Generative AI for Everyone</a>
+          If the machine-learning side of these projects is new to you,{' '}
+          <a href="https://www.deeplearning.ai/courses/generative-ai-for-everyone/" rel="noopener" target="_blank">Generative AI for Everyone</a>{' '}
           is a good free starting point.
         </p>
         <p>
-          You can see how student projects here are typically structured and run in the
+          You can see how student projects here are typically structured and run in the{' '}
           <a href="https://github.com/kaidatavis/student-projects" rel="noopener" target="_blank">student-projects repository</a>.
-          If something looks close to what you want but not quite right,
+          If something looks close to what you want but not quite right,{' '}
           <a href={`mailto:${profile.email}`}>send me an email</a> — the list is not exhaustive.
         </p>
       </div>
