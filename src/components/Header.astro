@@ -20,10 +20,10 @@ function isActive(href: string) {
         >KX</span
       >
       <span class="flex flex-col leading-none">
-        <span class="font-serif text-[1.05rem] font-semibold tracking-tight text-[var(--fg)] group-hover:text-[var(--link)]"
+        <span class="font-serif text-[1.25rem] font-semibold tracking-tight text-[var(--fg)] group-hover:text-[var(--link)]"
           >{profile.name}</span
         >
-        <span class="mt-0.5 hidden text-[0.8rem] text-[var(--fg-subtle)] sm:block"
+        <span class="mt-0.5 hidden text-[0.9rem] text-[var(--fg-subtle)] sm:block"
           >{profile.headerSubtitle}</span
         >
       </span>
@@ -39,7 +39,7 @@ function isActive(href: string) {
                   href={route(item.href)}
                   aria-current={isActive(item.href) ? 'page' : undefined}
                   class:list={[
-                    'block rounded-md px-3 py-2 text-sm no-underline transition-colors',
+                    'block rounded-md px-3 py-2 text-[1rem] no-underline transition-colors',
                     isActive(item.href)
                       ? 'font-medium text-[var(--fg)] bg-[var(--bg-inset)]'
                       : 'text-[var(--fg-muted)] hover:bg-[var(--bg-subtle)] hover:text-[var(--fg)]',
