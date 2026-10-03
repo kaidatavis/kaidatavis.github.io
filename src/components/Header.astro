@@ -1,5 +1,6 @@
 ---
 import { nav, profile } from '../config';
+import { route } from '../lib/routes';
 import ThemeToggle from './ThemeToggle.astro';
 
 const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
@@ -35,7 +36,7 @@ function isActive(href: string) {
             nav.map((item) => (
               <li>
                 <a
-                  href={item.href}
+                  href={route(item.href)}
                   aria-current={isActive(item.href) ? 'page' : undefined}
                   class:list={[
                     'block rounded-md px-3 py-2 text-sm no-underline transition-colors',
@@ -85,7 +86,7 @@ function isActive(href: string) {
           nav.map((item) => (
             <li>
               <a
-                href={item.href}
+                href={route(item.href)}
                 aria-current={isActive(item.href) ? 'page' : undefined}
                 class:list={[
                   'block rounded-md px-3 py-2.5 text-sm no-underline',

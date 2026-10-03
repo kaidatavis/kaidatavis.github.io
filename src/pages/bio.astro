@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { route } from '../lib/routes';
 import Icon from '../components/Icon.astro';
 import { profile, socials } from '../config';
 
@@ -154,8 +155,8 @@ const roles: Role[] = [
     </section>
 
     <p class="mt-10 border-t border-[var(--border)] pt-6 text-sm text-[var(--fg-subtle)]">
-      See <a href="/funding">funding</a>, <a href="/papers">papers</a> and{' '}
-      <a href="/services">services</a> for the rest of the picture.
+      See <a href={route('/funding')}>funding</a>, <a href={route('/papers')}>papers</a> and{' '}
+      <a href={route('/services')}>services</a> for the rest of the picture.
     </p>
   </div>
 </BaseLayout>

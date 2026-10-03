@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { asset, route } from '../lib/routes';
 import Icon from '../components/Icon.astro';
 import { profile, socials } from '../config';
 import { doiUrl } from '../lib/publications';
@@ -38,7 +39,7 @@ const highlights = [
   <section class="container-page pt-16 pb-4 sm:pt-24">
     <div class="flex flex-col gap-8 sm:flex-row sm:items-start sm:gap-10">
       <img
-        src={profile.photo.src}
+        src={asset(profile.photo.src)}
         alt={profile.photo.alt}
         width="132"
         height="132"
@@ -131,7 +132,7 @@ const highlights = [
       {
         highlights.map((item) => (
           <a
-            href={item.href}
+            href={route(item.href)}
             class="group flex flex-col rounded-lg border border-[var(--border)] bg-[var(--bg-subtle)] p-5 no-underline transition-colors hover:border-[var(--color-accent-400)] hover:bg-[var(--bg-inset)]"
           >
             <h2 class="font-serif text-base font-semibold text-[var(--fg)] group-hover:text-[var(--link)]">
@@ -154,7 +155,7 @@ const highlights = [
       <section class="container-page py-16">
         <div class="flex items-baseline justify-between gap-4">
           <h2 class="font-serif text-xl font-semibold tracking-tight">Recent publications</h2>
-          <a href="/papers" class="shrink-0 text-sm text-[var(--link)] no-underline hover:underline">
+          <a href={route('/papers')} class="shrink-0 text-sm text-[var(--link)] no-underline hover:underline">
             All papers →
           </a>
         </div>
@@ -163,7 +164,7 @@ const highlights = [
           {recent.map((pub) => (
             <li class="py-4">
               <a
-                href={pub.doi ? doiUrl(pub.doi) : pub.url ?? '/papers'}
+                href={pub.doi ? doiUrl(pub.doi) : pub.url ?? '/papers/'}
                 rel="noopener"
                 target="_blank"
                 class="block no-underline"
@@ -191,7 +192,7 @@ const highlights = [
         </p>
         <p class="prose-body mt-2 text-[var(--fg-muted)]">
           If you are a <strong>student</strong> looking for an internship or PhD, the
-          <a href="/projects">projects page</a> lists current opportunities and scholarship details.
+          <a href={route('/projects')}>projects page</a> lists current opportunities and scholarship details.
         </p>
         <a
           href={`mailto:${profile.email}`}

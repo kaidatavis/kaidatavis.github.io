@@ -1,5 +1,6 @@
 ---
 import { profile, socials, nav } from '../config';
+import { route } from '../lib/routes';
 import Icon from './Icon.astro';
 
 const year = new Date().getFullYear();
@@ -36,7 +37,7 @@ const year = new Date().getFullYear();
           {
             nav.map((item) => (
               <li>
-                <a href={item.href} class="text-sm text-[var(--fg-muted)] no-underline hover:text-[var(--link)] hover:underline">
+                <a href={route(item.href)} class="text-sm text-[var(--fg-muted)] no-underline hover:text-[var(--link)] hover:underline">
                   {item.label}
                 </a>
               </li>

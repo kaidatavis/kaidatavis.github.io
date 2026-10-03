@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { route } from '../lib/routes';
 import { nav } from '../config';
 ---
 
@@ -16,7 +17,7 @@ import { nav } from '../config';
         {
           nav.map((item) => (
             <li>
-              <a href={item.href}>{item.label}</a>
+              <a href={route(item.href)}>{item.label}</a>
             </li>
           ))
         }

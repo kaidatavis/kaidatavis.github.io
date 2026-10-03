@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import Icon from './Icon.astro';
+import { route } from '../lib/routes';
 
 interface Props {
   project: CollectionEntry<'projects'>;
@@ -22,7 +23,7 @@ const year = date ? date.getFullYear() : null;
 >
   <div class="flex flex-wrap items-baseline gap-x-2.5 gap-y-1">
     <h3 class="font-serif text-lg leading-snug font-semibold tracking-tight">
-      <a href={`/projects/${slug}`} class="no-underline hover:underline">{title}</a>
+      <a href={route(`/projects/${slug}`)} class="no-underline hover:underline">{title}</a>
     </h3>
     {
       open && (
@@ -60,7 +61,7 @@ const year = date ? date.getFullYear() : null;
   }
 
   <a
-    href={`/projects/${slug}`}
+    href={route(`/projects/${slug}`)}
     class="mt-4 inline-flex items-center gap-1 text-sm text-[var(--link)] no-underline hover:underline"
   >
     Read more

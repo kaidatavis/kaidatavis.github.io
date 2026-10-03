@@ -1,5 +1,6 @@
 ---
 import { getCollection, render, type CollectionEntry } from 'astro:content';
+import { route } from '../../lib/routes';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Icon from '../../components/Icon.astro';
 import { profile } from '../../config';
@@ -26,7 +27,7 @@ const year = date ? date.getFullYear() : null;
 <BaseLayout title={title} description={summary}>
   <div class="container-page py-12 sm:py-16">
     <a
-      href="/projects"
+      href={route('/projects')}
       class="inline-flex items-center gap-1 text-sm text-[var(--fg-subtle)] no-underline hover:text-[var(--link)] hover:underline"
     >
       <Icon name="arrowRight" class="size-3.5 rotate-180" />
@@ -99,7 +100,7 @@ const year = date ? date.getFullYear() : null;
     </article>
 
     <p class="mt-12 border-t border-[var(--border)] pt-6 text-sm text-[var(--fg-subtle)]">
-      Interested in this work? <a href="/projects#getting-started">See how to get started</a>
+      Interested in this work? <a href={route('/projects#getting-started')}>See how to get started</a>
       or <a href={`mailto:${profile.email}`}>email me</a>.
     </p>
   </div>

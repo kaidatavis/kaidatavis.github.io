@@ -1,4 +1,5 @@
 import rss from '@astrojs/rss';
+import { route } from '../lib/routes';
 import { doiUrl, getPublicationCategories, getPublications, pubAnchor } from '../lib/publications';
 import { profile } from '../config';
 
@@ -23,7 +24,7 @@ export async function GET(context: { site: URL }) {
           .filter(Boolean)
           .join(' · '),
         pubDate: pub.year ? new Date(Date.UTC(pub.year, month, 1)) : undefined,
-        link: `/papers/#${pubAnchor(pub)}`,
+        link: route(`/papers/#${pubAnchor(pub)}`),
         categories: [pub.category, ...pub.keywords],
       };
     }),

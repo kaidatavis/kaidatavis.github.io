@@ -1,5 +1,6 @@
 ---
 import { profile, socials } from '../config';
+import { asset } from '../lib/routes';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
@@ -16,7 +17,7 @@ const {
   title,
   description = profile.tagline,
   suffixTitle = true,
-  ogImage = '/og-default.svg',
+  ogImage = asset('/og-default.svg'),
 } = Astro.props;
 
 const fullTitle = suffixTitle ? `${title} – ${profile.name}` : title;
@@ -58,7 +59,7 @@ const jsonLd = {
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={new URL(ogImage, Astro.site)} />
 
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href={asset('/favicon.svg')} />
     <link rel="alternate" type="application/rss+xml" title={`${profile.name} – Publications`} href="/rss.xml" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
