@@ -1,31 +1,31 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import { asset, route } from '../lib/routes';
-import Icon from '../components/Icon.astro';
-import { profile, socials } from '../config';
-import { doiUrl } from '../lib/publications';
-import { getRecentPublications } from '../lib/publications';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { asset, route } from "../lib/routes";
+import Icon from "../components/Icon.astro";
+import { profile, socials } from "../config";
+import { doiUrl } from "../lib/publications";
+import { getRecentPublications } from "../lib/publications";
 
 const recent = getRecentPublications(4);
 
 const highlights = [
   {
-    href: '/projects',
-    title: 'Student projects',
-    body: 'Project ideas with scholarship details for PhD, internship and MSc students.',
-    cta: 'See open projects',
+    href: "/projects",
+    title: "Student projects",
+    body: "Project ideas with scholarship details for PhD, internship and MSc students.",
+    cta: "See open projects",
   },
   {
-    href: '/papers',
-    title: 'Selected publications',
-    body: 'Research on visual analytics, provenance, sensemaking and human-AI collaboration.',
-    cta: 'Browse all papers',
+    href: "/papers",
+    title: "Selected publications",
+    body: "Research on visual analytics, provenance, sensemaking and human-AI collaboration.",
+    cta: "Browse all papers",
   },
   {
-    href: '/funding',
-    title: 'Research funding',
-    body: 'Grants and projects across EPSRC, EU, defence and industry collaborators.',
-    cta: 'View funding record',
+    href: "/funding",
+    title: "Research funding",
+    body: "Grants and projects across EPSRC, EU, defence and industry collaborators.",
+    cta: "View funding record",
   },
 ];
 ---
@@ -49,16 +49,21 @@ const highlights = [
       />
 
       <div class="min-w-0">
-        <h1 class="font-serif text-3xl font-bold tracking-tight sm:text-[2.5rem] sm:leading-tight">
+        <h1
+          class="font-serif text-3xl font-bold tracking-tight sm:text-[2.5rem] sm:leading-tight"
+        >
           {profile.name}
-          <span class="ml-2 text-xl font-normal text-[var(--fg-subtle)] sm:text-2xl"
+          <span
+            class="ml-2 text-xl font-normal text-[var(--fg-subtle)] sm:text-2xl"
             >{profile.nameLocal}</span
           >
         </h1>
 
         <p class="mt-3 text-lg leading-relaxed text-[var(--fg-muted)]">
-          {profile.title} at{' '}
-          <a href={profile.schoolUrl} rel="noopener" target="_blank">{profile.school}</a>,
+          {profile.title} at{" "}
+          <a href={profile.schoolUrl} rel="noopener" target="_blank"
+            >{profile.school}</a
+          >,{" "}
           {profile.institution}.
         </p>
 
@@ -99,29 +104,48 @@ const highlights = [
   <section class="container-page py-12">
     <div class="prose-body max-w-none space-y-4">
       <p>
-        I am an <strong>Associate Professor</strong> in the{' '}
-        <a href={profile.schoolUrl} rel="noopener" target="_blank">School of Computer Science</a> at the{' '}
-        <a href={profile.institutionUrl} rel="noopener" target="_blank">University of Nottingham</a>, UK. I am{' '}
-        <strong>co-director</strong> of the school's{' '}
-        <a href="https://www.nottingham.ac.uk/computerscience/research/visualization-and-computer-graphics/visualization-and-computer-graphics.aspx" rel="noopener" target="_blank">Visualisation Research Group (VisTAG)</a>,
-        an organiser of the{' '}
-        <a href="https://www.turing.ac.uk/research/interest-groups/visualization" rel="noopener" target="_blank">Visualisation Interest Group</a>{' '}
-        at the Alan Turing Institute, and chair of the{' '}
-        <a href="http://eguk.org.uk/" rel="noopener" target="_blank">UK branch of Eurographics</a>.
+        I am an <strong>Associate Professor</strong> in the{" "}
+        <a href={profile.schoolUrl} rel="noopener" target="_blank"
+          >School of Computer Science</a
+        > at the{" "}
+        <a href={profile.institutionUrl} rel="noopener" target="_blank"
+          >University of Nottingham</a
+        >, UK. I am{" "}
+        <strong>co-director</strong> of the school's{" "}
+        <a
+          href="https://www.nottingham.ac.uk/computerscience/research/visualization-and-computer-graphics/visualization-and-computer-graphics.aspx"
+          rel="noopener"
+          target="_blank">Visualisation Research Group (VisTAG)</a
+        >, an organiser of the{" "}
+        <a
+          href="https://www.turing.ac.uk/research/interest-groups/visualization"
+          rel="noopener"
+          target="_blank">Visualisation Interest Group</a
+        >{" "}
+        at the Alan Turing Institute, and chair of the{" "}
+        <a href="http://eguk.org.uk/" rel="noopener" target="_blank"
+          >UK branch of Eurographics</a
+        >.
       </p>
 
       <p>
-        My research sits at the intersection of <strong>data science</strong> and{' '}
-        <strong>data visualisation</strong> — presenting data visually so that people can find patterns using
-        human cognition and domain knowledge. Currently I focus on{' '}
-        <strong>human-centred AI</strong>: collaboration and teaming between people and machine learning systems,
-        because the best results usually come from working together rather than either alone.
+        My research sits at the intersection of <strong>data science</strong> and{
+          " "
+        }
+        <strong>data visualisation</strong> — presenting data visually so that people
+        can find patterns using human cognition and domain knowledge. Currently I
+        focus on{" "}
+        <strong>human-centred AI</strong>: collaboration and teaming between
+        people and machine learning systems, because the best results usually
+        come from working together rather than either alone.
       </p>
 
       <p>
-        I have led research projects with a total value of over <strong>£12 million</strong>, funded by UK and EU
-        research councils (EPSRC, EU Framework Programme), government bodies (Ministry of Defence, Dstl,
-        US Department of Homeland Security) and industry (Microsoft, British Telecom).
+        I have led research projects with a total value of over <strong
+          >£12 million</strong
+        >, funded by UK and EU research councils (EPSRC, EU Framework
+        Programme), government bodies (Ministry of Defence, Dstl, US Department
+        of Homeland Security) and industry (Microsoft, British Telecom).
       </p>
     </div>
   </section>
@@ -138,10 +162,15 @@ const highlights = [
             <h2 class="font-serif text-base font-semibold text-[var(--fg)] group-hover:text-[var(--link)]">
               {item.title}
             </h2>
-            <p class="mt-1.5 flex-1 text-sm leading-relaxed text-[var(--fg-muted)]">{item.body}</p>
+            <p class="mt-1.5 flex-1 text-sm leading-relaxed text-[var(--fg-muted)]">
+              {item.body}
+            </p>
             <span class="mt-3 inline-flex items-center gap-1 text-sm font-medium text-[var(--link)]">
               {item.cta}
-              <Icon name="arrowRight" class="size-3.5 transition-transform group-hover:translate-x-0.5" />
+              <Icon
+                name="arrowRight"
+                class="size-3.5 transition-transform group-hover:translate-x-0.5"
+              />
             </span>
           </a>
         ))
@@ -154,8 +183,13 @@ const highlights = [
     recent.length > 0 && (
       <section class="container-page py-16">
         <div class="flex items-baseline justify-between gap-4">
-          <h2 class="font-serif text-xl font-semibold tracking-tight">Recent publications</h2>
-          <a href={route('/papers')} class="shrink-0 text-sm text-[var(--link)] no-underline hover:underline">
+          <h2 class="font-serif text-xl font-semibold tracking-tight">
+            Recent publications
+          </h2>
+          <a
+            href={route("/papers")}
+            class="shrink-0 text-sm text-[var(--link)] no-underline hover:underline"
+          >
             All papers →
           </a>
         </div>
@@ -164,12 +198,14 @@ const highlights = [
           {recent.map((pub) => (
             <li class="py-4">
               <a
-                href={pub.doi ? doiUrl(pub.doi) : pub.url ?? '/papers/'}
+                href={pub.doi ? doiUrl(pub.doi) : (pub.url ?? "/papers/")}
                 rel="noopener"
                 target="_blank"
                 class="block no-underline"
               >
-                <p class="font-medium text-[var(--fg)] group-hover:text-[var(--link)]">{pub.title}</p>
+                <p class="font-medium text-[var(--fg)] group-hover:text-[var(--link)]">
+                  {pub.title}
+                </p>
                 <p class="mt-0.5 text-sm text-[var(--fg-muted)]">
                   <span class="italic">{pub.venue}</span> · {pub.year}
                 </p>
@@ -185,14 +221,18 @@ const highlights = [
   <section class="border-t border-[var(--border)] bg-[var(--bg-subtle)]">
     <div class="container-page py-14">
       <div class="max-w-2xl">
-        <h2 class="font-serif text-xl font-semibold tracking-tight">Get in touch</h2>
+        <h2 class="font-serif text-xl font-semibold tracking-tight">
+          Get in touch
+        </h2>
         <p class="prose-body mt-2 text-[var(--fg-muted)]">
-          If you are a <strong>company or academic</strong> interested in visualisation or human-centred AI, I
-          would be glad to hear from you.
+          If you are a <strong>company or academic</strong> interested in visualisation
+          or human-centred AI, I would be glad to hear from you.
         </p>
         <p class="prose-body mt-2 text-[var(--fg-muted)]">
-          If you are a <strong>student</strong> looking for an internship or PhD, the{' '}
-          <a href={route('/projects')}>projects page</a> lists current opportunities and scholarship details.
+          If you are a <strong>student</strong> looking for an internship or PhD,
+          the{" "}
+          <a href={route("/projects")}>projects page</a> lists current opportunities
+          and scholarship details.
         </p>
         <a
           href={`mailto:${profile.email}`}

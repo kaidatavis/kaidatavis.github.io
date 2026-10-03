@@ -6,7 +6,7 @@
 export const profile = {
   name: 'Kai Xu',
   nameLocal: '徐凯',
-  title: 'Associate Professor in Computer Science',
+  title: 'Associate Professor',
   role: 'Co-director, Visualisation Research Group (VisTAG)',
   institution: 'University of Nottingham',
   institutionUrl: 'https://www.nottingham.ac.uk/',
@@ -26,9 +26,7 @@ export const profile = {
 
 export const socials = [
   { label: 'Google Scholar', href: 'https://scholar.google.com/citations?user=sTfJNSIAAAAJ&hl=en', icon: 'scholar' },
-  { label: 'GitHub', href: 'https://github.com/kaidatavis/', icon: 'github' },
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/kaidatavis/', icon: 'linkedin' },
-  { label: 'YouTube', href: 'https://www.youtube.com/channel/UCWIz8NDGqybv1ywKqTSHUnQ', icon: 'youtube' },
   { label: 'Bluesky', href: 'https://bsky.app/profile/kaidatavis.bsky.social', icon: 'bluesky' },
   { label: 'University Profile', href: 'https://www.nottingham.ac.uk/computerscience/people/kai.xu', icon: 'university' },
 ] as const;
