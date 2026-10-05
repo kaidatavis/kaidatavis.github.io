@@ -41,5 +41,5 @@ export const nav = [
   { href: '/papers', label: 'Papers' },
   { href: '/services', label: 'Services' },
   { href: '/projects', label: 'Projects' },
-  { href: '/bio', label: 'Bio' },
+  { href: '/bio', label: 'CV' },
 ] as const;
