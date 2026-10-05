@@ -35,6 +35,7 @@ export const socials = [
 ] as const;
 
 export const nav = [
+  { href: '/', label: 'Home' },
   { href: '/highlights', label: 'Highlights' },
   { href: '/funding', label: 'Funding' },
   { href: '/papers', label: 'Papers' },
