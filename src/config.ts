@@ -40,6 +40,6 @@ export const nav = [
   { href: '/funding', label: 'Funding' },
   { href: '/papers', label: 'Papers' },
   { href: '/services', label: 'Services' },
-  { href: '/projects', label: 'Projects' },
+  { href: '/projects', label: 'Students' },
   { href: '/bio', label: 'CV' },
 ] as const;

@@ -212,8 +212,15 @@ const highlights = [
         I have led many research projects with a total value of over <strong
           >£12 million</strong
         >, funded by UK and EU research councils (EPSRC, EU Framework
-        Programme), government bodies (Ministry of Defence, Dstl, US Department
-        of Homeland Security) and industry (Microsoft, British Telecom).
+        Programme), government bodies (Ministry of Defence, Dstl, US
+        Departmentof Homeland Security) and industry (Microsoft, British
+        Telecom).
+      </p>
+      <p>
+        If you are student looking for an <strong>internship</strong> or <strong
+          >PhD</strong
+        >, please see the {" "}
+        <a href={route("/projects")}>Students</a> page for the details.
       </p>
     </div>
   </section>
@@ -257,7 +264,9 @@ const highlights = [
                     {item.title}
                   </p>
                   {item.detail && (
-                    <p class="mt-0.5 text-sm text-[var(--fg-muted)]">{item.detail}</p>
+                    <p class="mt-0.5 text-sm text-[var(--fg-muted)]">
+                      {item.detail}
+                    </p>
                   )}
                 </div>
               </a>
